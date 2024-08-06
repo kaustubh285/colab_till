@@ -4,9 +4,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory :
+
+To run the whole project together, you can run:
 
 ### `npm start`
+
+To only run react side of the project -
+
+### `npm run start:react`
+
+To only run electron side of the project -
+
+### `npm run start:electron`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
