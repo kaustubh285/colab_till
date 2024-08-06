@@ -18,7 +18,7 @@
   },
   "main": "electron/main.js",
   "scripts": {
-    "start": "concurrently  \"cross-env BROWSER=none PORT=3000 react-scripts start\" \"wait-on http://localhost:3000 && ELECTRON_START_URL=http://localhost:3000 electron .\"",
+    "start": "concurrently  \"cross-env BROWSER=none PORT=3000 react-scripts start\" \"wait-on tcp:127.0.0.1:3000 && ELECTRON_START_URL=http://localhost:3000 electron .\"",
     "start:electron": "ELECTRON_START_URL=http://localhost:3000 electron .",
     "start:react": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
