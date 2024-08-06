@@ -3,6 +3,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { channels } = require("../src/shared/constants");
 const path = require("path");
+const { getEmployees } = require("./helper/api");
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let window = null;
@@ -37,21 +38,51 @@ app.on("activate", () => {
     createWindow();
   }
 });
-const products = {
-  notebook: {
-    name: "notebook",
-    price: "2500",
-    color: "gray",
-  },
-  headphone: {
-    name: "headphone",
-    price: "700",
-    color: "black",
-  },
-};
 
 // End of the file
-ipcMain.on(channels.GET_DATA, (event, arg) => {
-  const { product } = arg;
-  event.sender.send(channels.GET_DATA, products[product]);
+ipcMain.on(channels.USER_ACTION_UNAUTH, async (event, arg) => {
+  try {
+    let employees = [];
+    try {
+      employees = await getEmployees();
+    } catch (err) {
+      throw new Error("Unable to communicate with main!");
+    }
+
+    const { input, actionType } = arg;
+
+    console.log(employees);
+    console.log(input, actionType);
+    if (actionType !== "login" || actionType !== "clock") {
+      event.sender.send(channels.USER_ACTION_UNAUTH, {
+        error: "Unknown Action type!",
+      });
+    }
+
+    employees.forEach((emp) => {
+      if (Number(emp["till_code"]) === input) {
+        if (actionType !== "clock") {
+          // Even if clocked-in, login by default!
+          // Update backend to clock-in user
+          event.sender.send(channels.USER_ACTION_UNAUTH, {
+            message: `${emp["first_name"]} is clocked-in`,
+          });
+          return;
+        }
+
+        event.sender.send(channels.USER_ACTION_UNAUTH, {
+          message: `${emp["first_name"]} is logged in`,
+        });
+        return;
+      }
+    });
+
+    event.sender.send(channels.USER_ACTION_UNAUTH, {
+      error: "Till code not found",
+    });
+  } catch (err) {
+    event.sender.send(channels.USER_ACTION_UNAUTH, {
+      error: err.message,
+    });
+  }
 });
