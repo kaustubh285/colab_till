@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 // import Unauth from "./page/Unauth";
-import Home from "./page/Home";
 import Menu from "./page/Menu";
 
 function App() {
