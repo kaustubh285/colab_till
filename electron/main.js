@@ -19,7 +19,7 @@ const createWindow = () => {
     },
   });
   // And loading it in the window
-  window.loadURL(startUrl);
+  window.loadURL(startUrl + "/home");
   window.show();
   window.webContents.openDevTools({ mode: "detach" });
 };
@@ -51,8 +51,7 @@ ipcMain.on(channels.USER_ACTION_UNAUTH, async (event, arg) => {
 
     const { input, actionType } = arg;
 
-    console.log(employees);
-    console.log(input, actionType);
+    let responseSent = false;
     if (actionType !== "login" || actionType !== "clock") {
       event.sender.send(channels.USER_ACTION_UNAUTH, {
         error: "Unknown Action type!",
@@ -60,26 +59,41 @@ ipcMain.on(channels.USER_ACTION_UNAUTH, async (event, arg) => {
     }
 
     employees.forEach((emp) => {
-      if (Number(emp["till_code"]) === input) {
-        if (actionType !== "clock") {
+      if (Number(emp["till_code"]) == input) {
+        if (actionType === "clock") {
           // Even if clocked-in, login by default!
           // Update backend to clock-in user
+          console.log("Clocked in");
+          responseSent = true;
           event.sender.send(channels.USER_ACTION_UNAUTH, {
             message: `${emp["first_name"]} is clocked-in`,
+            user: {
+              emp_id: emp["emp_id"],
+              name: emp["first_name"],
+              till_code: emp["till_code"],
+            },
           });
           return;
         }
-
+        console.log("Logged in");
+        responseSent = true;
         event.sender.send(channels.USER_ACTION_UNAUTH, {
           message: `${emp["first_name"]} is logged in`,
+          user: {
+            emp_id: emp["emp_id"],
+            name: emp["first_name"],
+            till_code: emp["till_code"],
+          },
         });
         return;
       }
     });
 
-    event.sender.send(channels.USER_ACTION_UNAUTH, {
-      error: "Till code not found",
-    });
+    if (!responseSent) {
+      event.sender.send(channels.USER_ACTION_UNAUTH, {
+        error: "Till code not found",
+      });
+    }
   } catch (err) {
     event.sender.send(channels.USER_ACTION_UNAUTH, {
       error: err.message,

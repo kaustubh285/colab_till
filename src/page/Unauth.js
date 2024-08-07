@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { channels } from "../shared/constants";
 import Keypad from "../components/Keypad";
 
 const { ipcRenderer } = window.require("electron");
 function Unauth() {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [data, setData] = useState({});
 
@@ -44,11 +45,15 @@ function Unauth() {
   useEffect(() => {
     // Listen for the event
     ipcRenderer.on(channels.USER_ACTION_UNAUTH, (event, arg) => {
-      setData(arg);
-
-      setTimeout(() => {
-        setData("");
-      }, 3000);
+      if (arg.error) {
+        setData(arg);
+        setTimeout(() => {
+          setData("");
+        }, 3000);
+      } else {
+        localStorage.setItem("user_dets", JSON.stringify(arg.user));
+        navigate("/home");
+      }
     });
     // Clean the listener after the component is dismounted
     return () => {
