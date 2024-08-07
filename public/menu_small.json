@@ -1,0 +1,122 @@
+{
+  "cafe_name": "Sample! Cafe",
+  "menu": {
+    "drinks": {
+      "hot_drinks": {
+        "coffee": [
+          {
+            "item_id": 1,
+            "item_name": "Espresso",
+            "item_description": "coffee",
+            "item_price_eat_in": 2.6,
+            "item_price_takeaway": 2.6,
+            "item_contents": "Espresso coffee",
+            "item_topic": "hot_drinks"
+          },
+          {
+            "item_id": 2,
+            "item_name": "Flat White",
+            "item_description": "coffee",
+            "item_price_eat_in": 3.2,
+            "item_price_takeaway": 3.2,
+            "item_contents": "Milk, coffee",
+            "item_topic": "hot_drinks"
+          }
+        ],
+        "others": [
+          {
+            "item_id": 6,
+            "item_name": "Chai Latte",
+            "item_description": "other_hot_drinks",
+            "item_price_eat_in": 3.3,
+            "item_price_takeaway": 3.3,
+            "item_contents": "Milk, chai spices",
+            "item_topic": "hot_drinks"
+          },
+          {
+            "item_id": 7,
+            "item_name": "Matcha Latte",
+            "item_description": "other_hot_drinks",
+            "item_price_eat_in": 3.3,
+            "item_price_takeaway": 3.3,
+            "item_contents": "Milk, matcha",
+            "item_topic": "hot_drinks"
+          }
+        ]
+      },
+      "cold_drinks": {
+        "smoothies": [
+          {
+            "item_id": 13,
+            "item_name": "Clean Green",
+            "item_description": "smoothie",
+            "item_price_eat_in": 5.5,
+            "item_price_takeaway": 5.5,
+            "item_contents": "Green vegetables, fruits",
+            "item_topic": "smoothies"
+          },
+          {
+            "item_id": 14,
+            "item_name": "Coco Loco",
+            "item_description": "smoothie",
+            "item_price_eat_in": 5.5,
+            "item_price_takeaway": 5.5,
+            "item_contents": "Coconut, fruits",
+            "item_topic": "smoothies"
+          }
+        ]
+      }
+    },
+    "food": {
+      "edibles": [
+        {
+          "item_id": 19,
+          "item_name": "The Veggie Dropshot",
+          "item_description": "food",
+          "item_price_eat_in": 11.95,
+          "item_price_takeaway": 11.95,
+          "item_contents": "Vegetarian ingredients",
+          "item_topic": "food"
+        },
+        {
+          "item_id": 20,
+          "item_name": "The Serve",
+          "item_description": "food",
+          "item_price_eat_in": 6.5,
+          "item_price_takeaway": 6.5,
+          "item_contents": "Ingredients for 'The Serve'",
+          "item_topic": "food"
+        },
+        {
+          "item_id": 21,
+          "item_name": "The Smash",
+          "item_description": "food",
+          "item_price_eat_in": 5.0,
+          "item_price_takeaway": 5.0,
+          "item_contents": "Ingredients for 'The Smash'",
+          "item_topic": "food"
+        }
+      ],
+      "extras": [
+        {
+          "item_id": 34,
+          "item_name": "Sourdough Toast",
+          "item_description": "extra",
+          "item_price_eat_in": 2.0,
+          "item_price_takeaway": 2.0,
+          "item_contents": "Sourdough toast",
+          "item_topic": "extras"
+        },
+        {
+          "item_id": 35,
+          "item_name": "Feta",
+          "item_description": "extra",
+          "item_price_eat_in": 2.0,
+          "item_price_takeaway": 2.0,
+          "item_contents": "Feta cheese",
+          "item_topic": "extras"
+        }
+      ]
+    }
+  }
+}

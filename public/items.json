@@ -1,0 +1,362 @@
+[
+  {
+    "item_id": 1,
+    "item_name": "Espresso",
+    "item_description": "coffee",
+    "item_price_eat_in": 2.6,
+    "item_price_takeaway": 2.6,
+    "item_contents": "Espresso coffee",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 2,
+    "item_name": "Flat White",
+    "item_description": "coffee",
+    "item_price_eat_in": 3.2,
+    "item_price_takeaway": 3.2,
+    "item_contents": "Milk, coffee",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 3,
+    "item_name": "Latte",
+    "item_description": "coffee",
+    "item_price_eat_in": 3.2,
+    "item_price_takeaway": 3.2,
+    "item_contents": "Milk, coffee",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 4,
+    "item_name": "Cappuccino",
+    "item_description": "coffee",
+    "item_price_eat_in": 3.2,
+    "item_price_takeaway": 3.2,
+    "item_contents": "Milk, coffee",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 5,
+    "item_name": "Mocha",
+    "item_description": "coffee",
+    "item_price_eat_in": 3.5,
+    "item_price_takeaway": 3.5,
+    "item_contents": "Milk, coffee, chocolate",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 6,
+    "item_name": "Chai Latte",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.3,
+    "item_price_takeaway": 3.3,
+    "item_contents": "Milk, chai spices",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 7,
+    "item_name": "Matcha Latte",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.3,
+    "item_price_takeaway": 3.3,
+    "item_contents": "Milk, matcha",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 8,
+    "item_name": "Turmeric Latte",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.3,
+    "item_price_takeaway": 3.3,
+    "item_contents": "Milk, turmeric",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 9,
+    "item_name": "Beetroot Latte",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.3,
+    "item_price_takeaway": 3.3,
+    "item_contents": "Milk, beetroot",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 10,
+    "item_name": "Chai Matcha",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.5,
+    "item_price_takeaway": 3.5,
+    "item_contents": "Milk, chai spices, matcha",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 11,
+    "item_name": "Hot Chocolate",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.5,
+    "item_price_takeaway": 3.5,
+    "item_contents": "Milk, chocolate",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 12,
+    "item_name": "Lotus Hot Choc",
+    "item_description": "other_hot_drinks",
+    "item_price_eat_in": 3.75,
+    "item_price_takeaway": 3.75,
+    "item_contents": "Milk, chocolate, lotus biscoff",
+    "item_topic": "hot_drinks"
+  },
+  {
+    "item_id": 13,
+    "item_name": "Clean Green",
+    "item_description": "smoothie",
+    "item_price_eat_in": 5.5,
+    "item_price_takeaway": 5.5,
+    "item_contents": "Green vegetables, fruits",
+    "item_topic": "smoothies"
+  },
+  {
+    "item_id": 14,
+    "item_name": "Coco Loco",
+    "item_description": "smoothie",
+    "item_price_eat_in": 5.5,
+    "item_price_takeaway": 5.5,
+    "item_contents": "Coconut, fruits",
+    "item_topic": "smoothies"
+  },
+  {
+    "item_id": 15,
+    "item_name": "Mango Passion",
+    "item_description": "smoothie",
+    "item_price_eat_in": 5.5,
+    "item_price_takeaway": 5.5,
+    "item_contents": "Mango, passion fruit",
+    "item_topic": "smoothies"
+  },
+  {
+    "item_id": 16,
+    "item_name": "Peanut Butter, Banana & Honey",
+    "item_description": "smoothie",
+    "item_price_eat_in": 5.5,
+    "item_price_takeaway": 5.5,
+    "item_contents": "Peanut butter, banana, honey",
+    "item_topic": "smoothies"
+  },
+  {
+    "item_id": 17,
+    "item_name": "Strawberry & Banana",
+    "item_description": "smoothie",
+    "item_price_eat_in": 5.5,
+    "item_price_takeaway": 5.5,
+    "item_contents": "Strawberry, banana",
+    "item_topic": "smoothies"
+  },
+  {
+    "item_id": 18,
+    "item_name": "Scoop Of Either Choc & Nut Or Choc",
+    "item_description": "smoothie",
+    "item_price_eat_in": 6.5,
+    "item_price_takeaway": 6.5,
+    "item_contents": "Chocolate, nuts",
+    "item_topic": "smoothies"
+  },
+  {
+    "item_id": 19,
+    "item_name": "The Veggie Dropshot",
+    "item_description": "food",
+    "item_price_eat_in": 11.95,
+    "item_price_takeaway": 11.95,
+    "item_contents": "Vegetarian ingredients",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 20,
+    "item_name": "The Serve",
+    "item_description": "food",
+    "item_price_eat_in": 6.5,
+    "item_price_takeaway": 6.5,
+    "item_contents": "Ingredients for 'The Serve'",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 21,
+    "item_name": "The Smash",
+    "item_description": "food",
+    "item_price_eat_in": 5.0,
+    "item_price_takeaway": 5.0,
+    "item_contents": "Ingredients for 'The Smash'",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 22,
+    "item_name": "The Advantage",
+    "item_description": "food",
+    "item_price_eat_in": 6.2,
+    "item_price_takeaway": 6.2,
+    "item_contents": "Ingredients for 'The Advantage'",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 23,
+    "item_name": "The Forehand",
+    "item_description": "food",
+    "item_price_eat_in": 7.2,
+    "item_price_takeaway": 7.2,
+    "item_contents": "Ingredients for 'The Forehand'",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 24,
+    "item_name": "The Refuel",
+    "item_description": "food",
+    "item_price_eat_in": 6.95,
+    "item_price_takeaway": 6.95,
+    "item_contents": "Ingredients for 'The Refuel'",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 25,
+    "item_name": "The Slice",
+    "item_description": "food",
+    "item_price_eat_in": 3.0,
+    "item_price_takeaway": 3.0,
+    "item_contents": "Ingredients for 'The Slice'",
+    "item_topic": "food"
+  },
+  {
+    "item_id": 26,
+    "item_name": "The Break Point",
+    "item_description": "special",
+    "item_price_eat_in": 9.95,
+    "item_price_takeaway": 9.95,
+    "item_contents": "Ingredients for 'The Break Point'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 27,
+    "item_name": "The Game, Set & Match",
+    "item_description": "special",
+    "item_price_eat_in": 11.5,
+    "item_price_takeaway": 11.5,
+    "item_contents": "Ingredients for 'The Game, Set & Match'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 28,
+    "item_name": "The Volley",
+    "item_description": "special",
+    "item_price_eat_in": 7.5,
+    "item_price_takeaway": 7.5,
+    "item_contents": "Ingredients for 'The Volley'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 29,
+    "item_name": "The Rafa Na-Dill",
+    "item_description": "special",
+    "item_price_eat_in": 12.5,
+    "item_price_takeaway": 12.5,
+    "item_contents": "Ingredients for 'The Rafa Na-Dill'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 30,
+    "item_name": "The Grass Court",
+    "item_description": "special",
+    "item_price_eat_in": 10.95,
+    "item_price_takeaway": 10.95,
+    "item_contents": "Ingredients for 'The Grass Court'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 31,
+    "item_name": "The Mini Break",
+    "item_description": "special",
+    "item_price_eat_in": 6.5,
+    "item_price_takeaway": 6.5,
+    "item_contents": "Ingredients for 'The Mini Break'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 32,
+    "item_name": "The Match Point",
+    "item_description": "special",
+    "item_price_eat_in": 11.5,
+    "item_price_takeaway": 11.5,
+    "item_contents": "Ingredients for 'The Match Point'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 33,
+    "item_name": "The Topspin",
+    "item_description": "special",
+    "item_price_eat_in": 9.5,
+    "item_price_takeaway": 9.5,
+    "item_contents": "Ingredients for 'The Topspin'",
+    "item_topic": "specials"
+  },
+  {
+    "item_id": 34,
+    "item_name": "Sourdough Toast",
+    "item_description": "extra",
+    "item_price_eat_in": 2.0,
+    "item_price_takeaway": 2.0,
+    "item_contents": "Sourdough toast",
+    "item_topic": "extras"
+  },
+  {
+    "item_id": 35,
+    "item_name": "Feta",
+    "item_description": "extra",
+    "item_price_eat_in": 2.0,
+    "item_price_takeaway": 2.0,
+    "item_contents": "Feta cheese",
+    "item_topic": "extras"
+  },
+  {
+    "item_id": 36,
+    "item_name": "Homemade Beans",
+    "item_description": "extra",
+    "item_price_eat_in": 3.0,
+    "item_price_takeaway": 3.0,
+    "item_contents": "Homemade beans",
+    "item_topic": "extras"
+  },
+  {
+    "item_id": 37,
+    "item_name": "Hash Browns",
+    "item_description": "extra",
+    "item_price_eat_in": 3.0,
+    "item_price_takeaway": 3.0,
+    "item_contents": "Hash browns",
+    "item_topic": "extras"
+  },
+  {
+    "item_id": 38,
+    "item_name": "Full English Breakfast",
+    "item_description": "extra",
+    "item_price_eat_in": 7.0,
+    "item_price_takeaway": 7.0,
+    "item_contents": "English breakfast ingredients",
+    "item_topic": "extras"
+  },
+  {
+    "item_id": 39,
+    "item_name": "French Toast",
+    "item_description": "extra",
+    "item_price_eat_in": 4.5,
+    "item_price_takeaway": 4.5,
+    "item_contents": "French toast ingredients",
+    "item_topic": "extras"
+  },
+  {
+    "item_id": 40,
+    "item_name": "Cakes",
+    "item_description": "extra",
+    "item_price_eat_in": 3.5,
+    "item_price_takeaway": 3.5,
+    "item_contents": "Cake ingredients",
+    "item_topic": "extras"
+  }
+]
