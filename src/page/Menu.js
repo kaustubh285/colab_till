@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MenuNav from "../components/MenuNav";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuFeatures from "../components/MenuFeatures";
 import OrderList from "../components/OrderList";
+import "./Menu.css";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -10,11 +11,13 @@ const Menu = () => {
   const [menu, setMenu] = useState([]);
   const [currentOrder, setCurrentOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
+  const [completeMenu, setCompleteMenu] = useState({});
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
 
   const getSubMenu = (menu, subRoute) => {
     let subMenu = menu;
     const routeParts = subRoute.split("/").filter((part) => part); // Split and filter out empty strings
-
+    setBreadcrumbs(["home", ...routeParts]);
     for (const part of routeParts) {
       if (subMenu[part]) {
         subMenu = subMenu[part];
@@ -23,7 +26,7 @@ const Menu = () => {
         return {};
       }
     }
-
+    console.log(subMenu);
     if (Array.isArray(subMenu)) {
       // If the subMenu is an array, return it as it is
       return subMenu;
@@ -35,10 +38,11 @@ const Menu = () => {
 
   useEffect(() => {
     const user_dets = JSON.parse(localStorage.getItem("user_dets"));
-    console.log(user_dets);
+
     setUserDets(user_dets);
     if (!user_dets) {
-      navigate("/");
+      setUserDets({ id: 2, name: "Kaustubh", code: "696" });
+      // navigate("/");
     }
   }, [location.pathname]);
 
@@ -50,10 +54,9 @@ const Menu = () => {
       },
     }).then(async function (response) {
       let res = await response.json();
-      console.log(res);
-
+      setCompleteMenu(res);
       const currentPath = location.pathname.replace("/menu", ""); // Remove the base path
-      console.log(getSubMenu(res.menu, currentPath));
+
       setMenu(getSubMenu(res.menu, currentPath));
     });
     setCurrentOrder(JSON.parse(localStorage.getItem("current_order")) || []);
@@ -75,18 +78,29 @@ const Menu = () => {
   }, [location.pathname]);
 
   return (
-    <div className='h-screen w-screen'>
-      <div className='flex flex-col space-y-3 h-full w-full bg-blue-100 p-3'>
-        <MenuNav navigate={navigate} userDets={userDets} />
-        <div className='flex-1 bg-slate-200 flex flex-col md:flex-row'>
-          <OrderList currentOrder={currentOrder} />
+    <div className='h-screen w-screen flex flex-col overflow-scroll bg-slate-900'>
+      <div className=' bg-slate-900 flex-1 flex flex-col-reverse md:flex-row'>
+        {/* top */}
 
-          <div className='bg-yellow-200 min-h-32 md:flex-1 flex-col'>
+        <div className=' bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block'>
+          {/* Receipt */}
+          <OrderList currOrder={currentOrder} />
+        </div>
+
+        <div className=' flex-1 flex flex-col'>
+          {/* right */}
+
+          <div className=' h-20 border-b border-white '>{/* nav */}</div>
+          <div
+            className={`flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
+              menu.length >= 3 ? " grid-cols-3 " : " grid-cols-2 "
+            } menu-content`}>
+            {/* body */}
             {menu &&
               menu?.map((item) =>
                 item.item_name ? (
                   <div
-                    className=' active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 block'
+                    className=' text-lg md:text-xl min-w-2/12 max-w-32 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
                     onClick={() => {
                       addToOrder(item);
                     }}>
@@ -94,7 +108,7 @@ const Menu = () => {
                   </div>
                 ) : (
                   <div
-                    className=' active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 block'
+                    className=' text-lg md:text-xl min-w-4/12 md:min-w-2/12 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
                     onClick={() => {
                       navigate(`${location.pathname}/${item}`);
                     }}>
@@ -103,7 +117,34 @@ const Menu = () => {
                 )
               )}
           </div>
-          <MenuFeatures navigate={navigate} />
+          <div className=' border-t border-white px-5 py-2'>
+            <div
+              className=' text-white float-right  px-8 py-3 rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'
+              onClick={() => navigate(-1)}>
+              Back
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className=' bg-white md:h-max h-20 flex p-3 items-center'>
+        {/* bottom */}
+        <div className=' flex-1'></div>
+        <div className=' flex items-center space-x-3'>
+          <div
+            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer'
+            onClick={() => {
+              setCurrentOrder([]);
+            }}>
+            Clear order
+          </div>
+          <div className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'>
+            Home
+          </div>
+
+          <div className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer'>
+            Finish
+          </div>
         </div>
       </div>
     </div>
