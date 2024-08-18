@@ -90,7 +90,20 @@ const Menu = () => {
         <div className=' flex-1 flex flex-col'>
           {/* right */}
 
-          <div className=' h-20 border-b border-white '>{/* nav */}</div>
+          <div className=' h-20 border-b border-white flex items-center justify-between text-white px-5'>
+            <div className=' text-xl'>Logged in as : Kaustubh</div>
+            <div className=' text-xl border p-3'>
+              Table number:
+              <span> 0</span>
+            </div>
+
+            <div className=' text-xl border p-3'>Some option1</div>
+            <div className=' text-xl border p-3'>Some option2</div>
+            <div className=' w-12 aspect-square bg-white rounded-xl px-3 text-black flex flex-col space-y-0'>
+              <span>_</span>
+              <span>_</span>
+            </div>
+          </div>
           <div
             className={`flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
               menu.length >= 3 ? " grid-cols-3 " : " grid-cols-2 "
@@ -100,15 +113,22 @@ const Menu = () => {
               menu?.map((item) =>
                 item.item_name ? (
                   <div
-                    className=' text-lg md:text-xl min-w-2/12 max-w-32 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
+                    className=' text-lg md:text-xl w-2/12 max-w-32 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-sm m-2 relative flex-col space-y-2 shadow-slate-100'
                     onClick={() => {
                       addToOrder(item);
                     }}>
-                    {item.item_name}
+                    <div className=' py-2'>{item.item_name}</div>
+                    {/* <div className=' bg-orange-400  w-full'>
+                      {
+                        currentOrder.filter(
+                          (itm) => itm.item_name === item.item_name
+                        ).length
+                      }
+                    </div> */}
                   </div>
                 ) : (
                   <div
-                    className=' text-lg md:text-xl min-w-4/12 md:min-w-2/12 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
+                    className=' text-lg md:text-xl w-2/12 md:min-w-2/12 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
                     onClick={() => {
                       navigate(`${location.pathname}/${item}`);
                     }}>
@@ -129,15 +149,17 @@ const Menu = () => {
 
       <div className=' bg-white md:h-max h-20 flex p-3 items-center'>
         {/* bottom */}
-        <div className=' flex-1'></div>
-        <div className=' flex items-center space-x-3'>
+        <div className=' flex-1'>
           <div
-            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer'
+            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center '
             onClick={() => {
               setCurrentOrder([]);
+              localStorage.removeItem("current_order");
             }}>
             Clear order
           </div>
+        </div>
+        <div className=' flex items-center space-x-3'>
           <div className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'>
             Home
           </div>

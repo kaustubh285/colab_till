@@ -39,16 +39,17 @@ const OrderList = ({ currOrder }) => {
         })}
       </div>
       <div>
-        {/* <div className=' divide-red-300 flex w-full justify-between items-center'>
+        <div className=' divide-red-300 flex w-full justify-between items-center'>
           <p>final</p>
           <p>
-            {currentOrder.length > 0 &&
-              currentOrder
-                .map((item) => item.item_price_eat_in)
-                .reduce((prev, next) => prev + next)
-                .toFixed(2)}
+            {currOrder.length === 0
+              ? 0.0
+              : currOrder
+                  .map((item) => item.item_price_eat_in)
+                  .reduce((prev, next) => prev + next)
+                  .toFixed(2)}
           </p>
-        </div> */}
+        </div>
       </div>
     </div>
   );
