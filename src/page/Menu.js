@@ -9,10 +9,14 @@ const Menu = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [menu, setMenu] = useState([]);
-  const [currentOrder, setCurrentOrder] = useState([]);
+
+  const [groupedOrder, setGroupedOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
   const [completeMenu, setCompleteMenu] = useState({});
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [tableNum, setTableNum] = useState(0);
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const getSubMenu = (menu, subRoute) => {
     let subMenu = menu;
@@ -59,32 +63,95 @@ const Menu = () => {
 
       setMenu(getSubMenu(res.menu, currentPath));
     });
-    setCurrentOrder(JSON.parse(localStorage.getItem("current_order")) || []);
   };
 
-  const deleteFromOrder = (item) => {};
+  const handleAddMessage = (item, message) => {
+    let order = [...groupedOrder];
+
+    order.forEach((orderItem) => {
+      if (orderItem["item_name"] === item.item_name) {
+        orderItem["message"] = message;
+      }
+    });
+
+    setGroupedOrder(order);
+    localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
+  };
+
   const addToOrder = (item) => {
-    const updatedOrder = [...currentOrder, item];
-    setCurrentOrder(updatedOrder);
-    localStorage.setItem("current_order", JSON.stringify(updatedOrder));
+    let order = [...groupedOrder];
+    let found = false;
+
+    order.forEach((orderItem) => {
+      if (orderItem["item_name"] === item.item_name) {
+        orderItem["count"] += 1;
+        found = true;
+      }
+    });
+    if (!found) {
+      const newItem = { ...item, count: 1, message: "" };
+      order = [newItem].concat(groupedOrder);
+    }
+
+    setGroupedOrder(order);
+    localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
   };
 
   useEffect(() => {
-    setCurrentOrder(JSON.parse(localStorage.getItem("current_order")) || []);
+    setGroupedOrder(JSON.parse(localStorage.getItem("grouped_order")) || []);
   }, []);
 
   useEffect(() => {
     getData();
   }, [location.pathname]);
 
+  const handleTableChange = (val) => {
+    setTableNum(val);
+    setModalOpen(false);
+  };
+
   return (
-    <div className='h-screen w-screen flex flex-col overflow-scroll bg-slate-900'>
-      <div className=' bg-slate-900 flex-1 flex flex-col-reverse md:flex-row'>
+    <div className='h-screen w-screen flex flex-col overflow-scroll bg-slate-900 relative'>
+      {modalOpen && (
+        <div className=' absolute top-0 bottom-0 left-0 right-0 bg-slate-500 bg-opacity-60 z-50 flex items-center justify-center'>
+          <div className=' bg-white min-w-3/12 aspect-square flex flex-col items-center justify-start py-8 space-y-5 px-5 max-h-screen overflow-scroll'>
+            <p className=' text-xl font-semibold'>Select a table</p>
+            <div className=' grid grid-cols-5 gap-4'>
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
+                <div
+                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
+                  onClick={() => handleTableChange(val)}>
+                  {val}
+                </div>
+              ))}
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
+                <div
+                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
+                  onClick={() => handleTableChange(val)}>
+                  {val}
+                </div>
+              ))}
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
+                <div
+                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
+                  onClick={() => handleTableChange(val)}>
+                  {val}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      <div className=' bg-slate-900 flex-1 flex flex-col-reverse md:flex-row overflow-scroll '>
         {/* top */}
 
-        <div className=' bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block'>
+        <div className=' bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block max-h-full overflow-scroll relative'>
           {/* Receipt */}
-          <OrderList currOrder={currentOrder} />
+          <OrderList
+            groupedOrder={groupedOrder}
+            setGroupedOrder={setGroupedOrder}
+            handleAddMessage={handleAddMessage}
+          />
         </div>
 
         <div className=' flex-1 flex flex-col'>
@@ -92,16 +159,17 @@ const Menu = () => {
 
           <div className=' h-20 border-b border-white flex items-center justify-between text-white px-5'>
             <div className=' text-xl'>Logged in as : Kaustubh</div>
-            <div className=' text-xl border p-3'>
+            <div
+              className=' text-xl border p-3 cursor-pointer'
+              onClick={() => setModalOpen(true)}>
               Table number:
-              <span> 0</span>
+              <span> {tableNum}</span>
             </div>
 
             <div className=' text-xl border p-3'>Some option1</div>
             <div className=' text-xl border p-3'>Some option2</div>
-            <div className=' w-12 aspect-square bg-white rounded-xl px-3 text-black flex flex-col space-y-0'>
-              <span>_</span>
-              <span>_</span>
+            <div className=' min-w-12 p-3 bg-white rounded-xl text-black flex flex-col space-y-0'>
+              Logout
             </div>
           </div>
           <div
@@ -153,14 +221,20 @@ const Menu = () => {
           <div
             className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center '
             onClick={() => {
-              setCurrentOrder([]);
-              localStorage.removeItem("current_order");
+              if (window.confirm("confirm")) {
+                setGroupedOrder([]);
+                localStorage.removeItem("grouped_order");
+              }
             }}>
             Clear order
           </div>
         </div>
         <div className=' flex items-center space-x-3'>
-          <div className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'>
+          <div
+            className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'
+            onClick={() => {
+              navigate(`/menu`);
+            }}>
             Home
           </div>
 

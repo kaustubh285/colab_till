@@ -52,7 +52,7 @@ function Unauth() {
         }, 3000);
       } else {
         localStorage.setItem("user_dets", JSON.stringify(arg.user));
-        navigate("/home");
+        navigate("/menu");
       }
     });
     // Clean the listener after the component is dismounted
