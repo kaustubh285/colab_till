@@ -20,6 +20,7 @@ const OrderList = ({
   setGroupedOrder,
   handleAddMessage,
   orderAllergy,
+  addToOrder,
 }) => {
   // const [groupedOrder, setGroupedOrder] = useState({});
 
@@ -35,6 +36,24 @@ const OrderList = ({
     localStorage.setItem("grouped_order", JSON.stringify(newOrder));
   };
 
+  const removeOnceFromOrder = (item) => {
+    let order = [...groupedOrder];
+
+    order.forEach((orderItem) => {
+      if (orderItem["item_name"] === item.item_name) {
+        if (orderItem["count"] == 1) {
+          handleDelete(orderItem["item_name"]);
+          return;
+        } else {
+          orderItem["count"] -= 1;
+          setGroupedOrder(order);
+          localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
+          return;
+        }
+      }
+    });
+  };
+
   const swipeLeftDataSimple = (item_name) => ({
     content: (
       <div className=' bg-red-500 text-end w-full text-white font-semibold px-2 py-3'>
@@ -44,8 +63,8 @@ const OrderList = ({
     action: () => handleDelete(item_name),
   });
   return (
-    <div className='h-full p-2 flex flex-col divide-y-2 overflow-scroll'>
-      <p className='w-full text-xl'>Order till now</p>
+    <div className='h-full py-2 flex flex-col divide-y-2 overflow-scroll'>
+      <p className=' px-2w-full text-xl'>Order till now</p>
       {/* <p className=' bg-red-100'>
         Allergies:<span className=' pl-2'>{orderAllergy.toString()}</span>
       </p> */}
@@ -56,30 +75,50 @@ const OrderList = ({
               <SwipeableListItem
                 key={item.item_name}
                 swipeLeft={swipeLeftDataSimple(item.item_name)}>
-                <div className=' w-full py-3 border-dashed border-b flex flex-col'>
-                  <div className='flex  w-full'>
-                    <p className='min-w-9'>{`${item.count} x  `}</p>
-                    <p className='flex-1'>{item.item_name}</p>
-                    <p className='flex-1 max-w-12 overflow-hidden'>
-                      {" "}
-                      {"........................."}
-                    </p>
-                    <p className='ml-2'>
-                      {(item.count * item.item_price_eat_in).toFixed(2)}
-                    </p>
+                <div className='w-full flex items-stretch justify-between'>
+                  <div
+                    className=' flex flex-col  justify-around items-center cursor-pointer'
+                    onClick={() => removeOnceFromOrder(item)}>
+                    <div className='  px-3 py-2 text-3xl'>-</div>
                   </div>
+                  <div className=' bg-slate-200 flex-1 py-3 border-dashed border-b flex flex-col px-2 border-r-2 border-l-2'>
+                    <div className='flex  w-full'>
+                      <p className='min-w-9'>{`${item.count} x  `}</p>
+                      <p className='flex-1'>{item.item_name}</p>
+                      <p className='flex-1 max-w-12 overflow-hidden'>
+                        {" "}
+                        {"........................."}
+                      </p>
+                      <p className='ml-2'>
+                        {(item.count * item.item_price_eat_in).toFixed(2)}
+                      </p>
+                    </div>
 
-                  <input
-                    className=' w-full border rounded-lg border-slate-400 text-xs'
-                    type='text'
-                    placeholder='notes'
-                    value={item.message}
-                    onChange={(e) => handleAddMessage(item, e.target.value)}
-                  />
+                    <input
+                      className=' w-full border rounded-lg border-slate-400 text-xs'
+                      type='text'
+                      placeholder='notes'
+                      value={item.message}
+                      onChange={(e) => handleAddMessage(item, e.target.value)}
+                    />
+                  </div>
+                  <div
+                    className=' flex flex-col  justify-around items-center cursor-pointer'
+                    onClick={() => addToOrder(item)}>
+                    <div className=' px-3 py-2 text-2xl '>+</div>
+                  </div>
                 </div>
               </SwipeableListItem>
             );
           })}
+
+          {groupedOrder.length === 0 ? (
+            <div className=' h-full w-full bg-slate-50 flex items-center justify-center'>
+              <h1 className=' text-slate-500'>Order list empty...</h1>
+            </div>
+          ) : (
+            <></>
+          )}
         </SwipeableList>
       </div>
 
@@ -94,7 +133,7 @@ const OrderList = ({
         <p>Final</p>
         <p>
           {groupedOrder.length === 0
-            ? 0.0
+            ? "0.0"
             : groupedOrder
                 .map((item) => item.item_price_eat_in * item.count)
                 .reduce((prev, next) => prev + next, 0)

@@ -31,7 +31,7 @@ const Popover = ({ showMenu, setShowMenu }) => {
         Logout
       </div>
       <div className='px-2 py-3 border-b border-dotted cursor-pointer hover:font-semibold min-w-56 italic'>
-        Reciept
+        Latest Reciept
       </div>
       <div className='px-2 py-3 border-b border-dotted cursor-pointer hover:font-semibold min-w-56 italic'>
         Check Table Order

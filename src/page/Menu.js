@@ -144,6 +144,7 @@ const Menu = () => {
             groupedOrder={groupedOrder}
             setGroupedOrder={setGroupedOrder}
             handleAddMessage={handleAddMessage}
+            addToOrder={addToOrder}
           />
         </div>
 
