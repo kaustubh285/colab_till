@@ -117,6 +117,26 @@
         ]
       },
       "cold_drinks": {
+        "shakes": [
+          {
+            "item_id": 88,
+            "item_name": "Oreo Shake",
+            "item_description": "cookie shake",
+            "item_price_eat_in": 5.5,
+            "item_price_takeaway": 5.5,
+            "item_contents": "Green vegetables, fruits",
+            "item_topic": "shake"
+          },
+          {
+            "item_id": 89,
+            "item_name": "Biscoff Shake",
+            "item_description": "cookie shake",
+            "item_price_eat_in": 5.5,
+            "item_price_takeaway": 5.5,
+            "item_contents": "Green vegetables, fruits",
+            "item_topic": "shake"
+          }
+        ],
         "smoothies": [
           {
             "item_id": 13,

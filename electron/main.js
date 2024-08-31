@@ -19,7 +19,7 @@ const createWindow = () => {
     },
   });
   // And loading it in the window
-  window.loadURL(startUrl + "/home");
+  window.loadURL(startUrl + "/menu");
   window.show();
   window.webContents.openDevTools({ mode: "detach" });
 };

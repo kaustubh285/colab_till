@@ -3,6 +3,7 @@
   "menu": {
     "drinks": {
       "hot_drinks": {
+        "show_with_parent": "true",
         "coffee": [
           {
             "item_id": 1,
