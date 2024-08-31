@@ -15,7 +15,12 @@ import "@sandstreamdev/react-swipeable-list/dist/styles.css";
 //   }, {});
 // };
 
-const OrderList = ({ groupedOrder, setGroupedOrder, handleAddMessage }) => {
+const OrderList = ({
+  groupedOrder,
+  setGroupedOrder,
+  handleAddMessage,
+  orderAllergy,
+}) => {
   // const [groupedOrder, setGroupedOrder] = useState({});
 
   // useEffect(() => {
@@ -41,6 +46,9 @@ const OrderList = ({ groupedOrder, setGroupedOrder, handleAddMessage }) => {
   return (
     <div className='h-full p-2 flex flex-col divide-y-2 overflow-scroll'>
       <p className='w-full text-xl'>Order till now</p>
+      {/* <p className=' bg-red-100'>
+        Allergies:<span className=' pl-2'>{orderAllergy.toString()}</span>
+      </p> */}
       <div className='flex-1 space-y-3 pb-10'>
         <SwipeableList className='flex flex-col-reverse'>
           {groupedOrder.map((item) => {
@@ -75,6 +83,13 @@ const OrderList = ({ groupedOrder, setGroupedOrder, handleAddMessage }) => {
         </SwipeableList>
       </div>
 
+      {orderAllergy.length > 0 && (
+        <div className='divide-red-300 flex justify-between items-center p-2 absolute bottom-10 left-0 right-0 bg-white'>
+          <p className=' bg-red-100'>
+            Allergies:<span className=' pl-2'>{orderAllergy.toString()}</span>
+          </p>
+        </div>
+      )}
       <div className='divide-red-300 flex justify-between items-center p-2 absolute bottom-0 left-0 right-0 bg-white'>
         <p>Final</p>
         <p>

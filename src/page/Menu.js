@@ -5,6 +5,7 @@ import MenuFeatures from "../components/MenuFeatures";
 import OrderList from "../components/OrderList";
 import "./Menu.css";
 import Popover from "../components/Popover";
+import Modals from "../components/Modals";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -18,6 +19,9 @@ const Menu = () => {
   const [tableNum, setTableNum] = useState(0);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [allergiesOption, setAllergiesOption] = useState(false);
+  const [orderAllergy, setOrderAllergy] = useState([]);
+
   const [showMenu, setShowMenu] = useState(false);
 
   const getSubMenu = (menu, subRoute) => {
@@ -120,42 +124,23 @@ const Menu = () => {
             showMenu ? "opacity-25" : "opacity-0"
           }`}></div>
       )}
-      {modalOpen && (
-        <div className=' absolute top-0 bottom-0 left-0 right-0 bg-slate-500 bg-opacity-60 z-50 flex items-center justify-center'>
-          <div className=' bg-white min-w-3/12 aspect-square flex flex-col items-center justify-start py-8 space-y-5 px-5 max-h-screen overflow-scroll'>
-            <p className=' text-xl font-semibold'>Select a table</p>
-            <div className=' grid grid-cols-5 gap-4'>
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
-                <div
-                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
-                  onClick={() => handleTableChange(val)}>
-                  {val}
-                </div>
-              ))}
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
-                <div
-                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
-                  onClick={() => handleTableChange(val)}>
-                  {val}
-                </div>
-              ))}
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
-                <div
-                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
-                  onClick={() => handleTableChange(val)}>
-                  {val}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+
+      <Modals
+        modalOpen={modalOpen}
+        handleTableChange={handleTableChange}
+        orderAllergy={orderAllergy}
+        setOrderAllergy={setOrderAllergy}
+        setAllergiesOption={setAllergiesOption}
+        allergiesOption={allergiesOption}
+      />
+
       <div className=' bg-slate-900 flex-1 flex flex-col-reverse md:flex-row overflow-scroll '>
         {/* top */}
 
         <div className=' bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block max-h-full overflow-scroll relative'>
           {/* Receipt */}
           <OrderList
+            orderAllergy={orderAllergy}
             groupedOrder={groupedOrder}
             setGroupedOrder={setGroupedOrder}
             handleAddMessage={handleAddMessage}
@@ -174,7 +159,11 @@ const Menu = () => {
               <span> {tableNum}</span>
             </div>
 
-            <div className=' text-xl border p-3'>Some option1</div>
+            <div
+              className=' text-xl border p-3'
+              onClick={() => setAllergiesOption(true)}>
+              Allergies
+            </div>
             <div className=' text-xl border p-3'>Some option2</div>
             <button
               onClick={() => setShowMenu((curr) => !curr)}
