@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuFeatures from "../components/MenuFeatures";
 import OrderList from "../components/OrderList";
 import "./Menu.css";
+import Popover from "../components/Popover";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Menu = () => {
   const [tableNum, setTableNum] = useState(0);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const getSubMenu = (menu, subRoute) => {
     let subMenu = menu;
@@ -112,6 +114,12 @@ const Menu = () => {
 
   return (
     <div className='h-screen w-screen flex flex-col overflow-scroll bg-slate-900 relative'>
+      {showMenu && (
+        <div
+          className={` ease-in absolute top-0 right-0 bottom-0 w-full bg-black  py-4  z-40 delay-1000 transition-opacity ${
+            showMenu ? "opacity-25" : "opacity-0"
+          }`}></div>
+      )}
       {modalOpen && (
         <div className=' absolute top-0 bottom-0 left-0 right-0 bg-slate-500 bg-opacity-60 z-50 flex items-center justify-center'>
           <div className=' bg-white min-w-3/12 aspect-square flex flex-col items-center justify-start py-8 space-y-5 px-5 max-h-screen overflow-scroll'>
@@ -168,15 +176,24 @@ const Menu = () => {
 
             <div className=' text-xl border p-3'>Some option1</div>
             <div className=' text-xl border p-3'>Some option2</div>
-            <div className=' min-w-12 p-3 bg-white rounded-xl text-black flex flex-col space-y-0'>
-              Logout
-            </div>
+            <button
+              onClick={() => setShowMenu((curr) => !curr)}
+              className=' w-20 items-center p-3 bg-white rounded-xl text-black flex flex-col space-y-0 disabled:opacity-75'
+              disabled={showMenu}>
+              Menu
+            </button>
           </div>
           <div
-            className={`flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
+            className={`relative flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
               menu.length >= 3 ? " grid-cols-3 " : " grid-cols-2 "
             } menu-content`}>
             {/* body */}
+
+            {showMenu && (
+              <>
+                <Popover showMenu={showMenu} setShowMenu={setShowMenu} />
+              </>
+            )}
             {menu &&
               menu?.map((item) =>
                 item.item_name ? (
