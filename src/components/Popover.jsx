@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./Popover.css";
 
 const Popover = ({ showMenu, setShowMenu }) => {
   const [isVisible, setIsVisible] = useState(false); // Manages the visibility state of the popover
