@@ -1,0 +1,47 @@
+{
+  "sample1": {
+    "Cappuccino": [
+      {
+        "item_id": 4,
+        "item_name": "Cappuccino",
+        "item_description": "coffee",
+        "item_price_eat_in": 3.2,
+        "item_price_takeaway": 3.2,
+        "item_contents": "Milk, coffee",
+        "item_topic": "hot_drinks"
+      }
+    ]
+  },
+  "sample2": [
+    {
+      "name": "Cappuccino",
+      "message": "oat milk",
+      "list_of_item": [
+        {
+          "item_id": 4,
+          "item_name": "Cappuccino",
+          "item_description": "coffee",
+          "item_price_eat_in": 3.2,
+          "item_price_takeaway": 3.2,
+          "item_contents": "Milk, coffee",
+          "item_topic": "hot_drinks"
+        }
+      ]
+    },
+    {
+      "name": "latte",
+      "message": "",
+      "list_of_item": [
+        {
+          "item_id": 4,
+          "item_name": "latte",
+          "item_description": "coffee",
+          "item_price_eat_in": 3.2,
+          "item_price_takeaway": 3.2,
+          "item_contents": "Milk, coffee",
+          "item_topic": "hot_drinks"
+        }
+      ]
+    }
+  ]
+}

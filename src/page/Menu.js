@@ -6,6 +6,7 @@ import OrderList from "../components/OrderList";
 import "./Menu.css";
 import Popover from "../components/Popover";
 import Modals from "../components/Modals";
+import MenuItems from "../components/MenuItems";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Menu = () => {
 
   const [groupedOrder, setGroupedOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
-  const [completeMenu, setCompleteMenu] = useState({});
+  const [subMenu, setSubMenu] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [tableNum, setTableNum] = useState(0);
 
@@ -25,24 +26,26 @@ const Menu = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const getSubMenu = (menu, subRoute) => {
-    let subMenu = menu;
+    let subMenuTemp = menu;
+
     const routeParts = subRoute.split("/").filter((part) => part); // Split and filter out empty strings
     setBreadcrumbs(["home", ...routeParts]);
     for (const part of routeParts) {
-      if (subMenu[part]) {
-        subMenu = subMenu[part];
+      if (subMenuTemp[part]) {
+        subMenuTemp = subMenuTemp[part];
       } else {
         // If the route part doesn't exist in the menu, return an empty object or handle the error as needed
         return {};
       }
     }
-    console.log(subMenu);
-    if (Array.isArray(subMenu)) {
+    console.log(subMenuTemp);
+    setSubMenu(subMenuTemp);
+    if (Array.isArray(subMenuTemp)) {
       // If the subMenu is an array, return it as it is
-      return subMenu;
+      return subMenuTemp;
     } else {
       // If subMenu is an object, return its keys
-      return Object.keys(subMenu);
+      return Object.keys(subMenuTemp);
     }
   };
 
@@ -64,10 +67,12 @@ const Menu = () => {
       },
     }).then(async function (response) {
       let res = await response.json();
-      setCompleteMenu(res);
+      // setCompleteMenu(res);
       const currentPath = location.pathname.replace("/menu", ""); // Remove the base path
 
-      setMenu(getSubMenu(res.menu, currentPath));
+      let tempVal = getSubMenu(res.menu, currentPath);
+      setMenu(tempVal);
+      console.log(JSON.stringify(tempVal));
     });
   };
 
@@ -176,7 +181,7 @@ const Menu = () => {
           <div
             className={`relative flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
               menu.length >= 3 ? " grid-cols-3 " : " grid-cols-2 "
-            } menu-content`}>
+            } menu-content h-full overflow-scroll`}>
             {/* body */}
 
             {showMenu && (
@@ -184,33 +189,16 @@ const Menu = () => {
                 <Popover showMenu={showMenu} setShowMenu={setShowMenu} />
               </>
             )}
-            {menu &&
-              menu?.map((item) =>
-                item.item_name ? (
-                  <div
-                    className=' text-lg md:text-xl w-2/12 max-w-32 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-sm m-2 relative flex-col space-y-2 shadow-slate-100'
-                    onClick={() => {
-                      addToOrder(item);
-                    }}>
-                    <div className=' py-2'>{item.item_name}</div>
-                    {/* <div className=' bg-orange-400  w-full'>
-                      {
-                        currentOrder.filter(
-                          (itm) => itm.item_name === item.item_name
-                        ).length
-                      }
-                    </div> */}
-                  </div>
-                ) : (
-                  <div
-                    className=' text-lg md:text-xl w-2/12 md:min-w-2/12 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
-                    onClick={() => {
-                      navigate(`${location.pathname}/${item}`);
-                    }}>
-                    {item}
-                  </div>
-                )
-              )}
+            {/* {alert(JSON.stringify(breadcrumbs))} */}
+
+            <MenuItems
+              menu={menu}
+              addToOrder={addToOrder}
+              navigate={navigate}
+              location={location}
+              subMenu={subMenu}
+              breadcrumbs={breadcrumbs}
+            />
           </div>
           <div className=' border-t border-white px-5 py-2'>
             <div

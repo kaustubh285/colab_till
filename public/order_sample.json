@@ -1,0 +1,78 @@
+{
+  "order":{
+    "contents":[
+      {
+          "item_id": 37,
+          "item_name": "Hash Browns",
+          "item_description": "extra",
+          "item_price_eat_in": 3,
+          "item_price_takeaway": 3,
+          "item_contents": "Hash browns",
+          "item_topic": "extras",
+          "count": 1,
+          "message": "",
+          "prepared":false
+      },
+      {
+          "item_id": 38,
+          "item_name": "Full English Breakfast",
+          "item_description": "extra",
+          "item_price_eat_in": 7,
+          "item_price_takeaway": 7,
+          "item_contents": "English breakfast ingredients",
+          "item_topic": "extras",
+          "count": 1,
+          "message": "no beans",
+          "prepared":false
+      },
+      {
+          "item_id": 89,
+          "item_name": "Biscoff Shake",
+          "item_description": "cookie shake",
+          "item_price_eat_in": 5.5,
+          "item_price_takeaway": 5.5,
+          "item_contents": "Green vegetables, fruits",
+          "item_topic": "shake",
+          "count": 1,
+          "message": ""
+      },
+      {
+          "item_id": 88,
+          "item_name": "Oreo Shake",
+          "item_description": "cookie shake",
+          "item_price_eat_in": 5.5,
+          "item_price_takeaway": 5.5,
+          "item_contents": "Green vegetables, fruits",
+          "item_topic": "shake",
+          "count": 1,
+          "message": ""
+      }
+  ],
+  "allergies":["nuts", "dairy"],
+  "time":"11:23:30T29-08-2024",
+  "paid":true,
+  "payment_method":"card",
+  "table_no":"5",
+  "emp_name":"${emp_name}",
+  
+  },
+
+
+  "completed_${screen_name}_orders":[]
+
+
+  "screens": [
+    {
+      "name": "drinks",
+      "allowed_topics": ["coffee", "shakes", "cold_drink"]
+    },
+    {
+      "name": "smoothies",
+      "allowed_topics": ["smoothies"]
+    },
+    {
+      "name": "food",
+      "allowed_topics": ["extras", "sandwiches", "burger"]
+    }
+  ]
+}
