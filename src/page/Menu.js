@@ -153,30 +153,40 @@ const Menu = () => {
           />
         </div>
 
-        <div className=' flex-1 flex flex-col'>
+        <div className=' flex-1 flex flex-row-reverse'>
           {/* right */}
 
-          <div className=' h-20 border-b border-white flex items-center justify-between text-white px-5'>
+          <div className=' w-1/6 border-b border-white grid grid-cols-1 items-stretch gap-3 justify-between text-white px-5 py-4'>
             <div className=' text-xl'>Logged in as : Kaustubh</div>
-            <div
-              className=' text-xl border p-3 cursor-pointer'
-              onClick={() => setModalOpen(true)}>
-              Table number:
-              <span> {tableNum}</span>
-            </div>
-
-            <div
-              className=' text-xl border p-3'
-              onClick={() => setAllergiesOption(true)}>
-              Allergies
-            </div>
-            <div className=' text-xl border p-3'>Some option2</div>
             <button
               onClick={() => setShowMenu((curr) => !curr)}
-              className=' w-20 items-center p-3 bg-white rounded-xl text-black flex flex-col space-y-0 disabled:opacity-75'
+              className='text-xl border p-3 cursor-pointer disabled:opacity-75'
               disabled={showMenu}>
               Menu
             </button>
+            <div
+              className=' flex items-center justify-center text-xl border p-3 cursor-pointer'
+              onClick={() => setModalOpen(true)}>
+              <p>
+                Table number:
+                <span> {tableNum}</span>
+              </p>
+            </div>
+
+            <div
+              className=' flex items-center justify-center  text-xl border p-3'
+              onClick={() => setAllergiesOption(true)}>
+              Allergies
+            </div>
+            <div className=' flex items-center justify-center  text-xl border p-3'>
+              Some option
+            </div>
+
+            <div
+              className=' flex items-center justify-center  text-white  bg-teal-400  p-3 active:shadow-none cursor-pointer text-xl'
+              onClick={() => navigate(-1)}>
+              Back
+            </div>
           </div>
           <div
             className={`relative flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
@@ -200,21 +210,14 @@ const Menu = () => {
               breadcrumbs={breadcrumbs}
             />
           </div>
-          <div className=' border-t border-white px-5 py-2'>
-            <div
-              className=' text-white float-right  px-8 py-3 rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'
-              onClick={() => navigate(-1)}>
-              Back
-            </div>
-          </div>
         </div>
       </div>
 
-      <div className=' bg-white md:h-max h-20 flex p-3 items-center'>
+      <div className=' bg-white md:h-max h-40 flex items-center p-1'>
         {/* bottom */}
         <div className=' flex-1'>
           <div
-            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center '
+            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center  text-3xl'
             onClick={() => {
               if (window.confirm("confirm")) {
                 setGroupedOrder([]);
@@ -226,14 +229,14 @@ const Menu = () => {
         </div>
         <div className=' flex items-center space-x-3'>
           <div
-            className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'
+            className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl'
             onClick={() => {
               navigate(`/menu`);
             }}>
             Home
           </div>
 
-          <div className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer'>
+          <div className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl'>
             Finish
           </div>
         </div>
