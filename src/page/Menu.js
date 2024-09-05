@@ -4,6 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuFeatures from "../components/MenuFeatures";
 import OrderList from "../components/OrderList";
 import "./Menu.css";
+import Popover from "../components/Popover";
+import Modals from "../components/Modals";
+import MenuItems from "../components/MenuItems";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -12,31 +15,37 @@ const Menu = () => {
 
   const [groupedOrder, setGroupedOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
-  const [completeMenu, setCompleteMenu] = useState({});
+  const [subMenu, setSubMenu] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [tableNum, setTableNum] = useState(0);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [allergiesOption, setAllergiesOption] = useState(false);
+  const [orderAllergy, setOrderAllergy] = useState([]);
+
+  const [showMenu, setShowMenu] = useState(false);
 
   const getSubMenu = (menu, subRoute) => {
-    let subMenu = menu;
+    let subMenuTemp = menu;
+
     const routeParts = subRoute.split("/").filter((part) => part); // Split and filter out empty strings
     setBreadcrumbs(["home", ...routeParts]);
     for (const part of routeParts) {
-      if (subMenu[part]) {
-        subMenu = subMenu[part];
+      if (subMenuTemp[part]) {
+        subMenuTemp = subMenuTemp[part];
       } else {
         // If the route part doesn't exist in the menu, return an empty object or handle the error as needed
         return {};
       }
     }
-    console.log(subMenu);
-    if (Array.isArray(subMenu)) {
+    console.log(subMenuTemp);
+    setSubMenu(subMenuTemp);
+    if (Array.isArray(subMenuTemp)) {
       // If the subMenu is an array, return it as it is
-      return subMenu;
+      return subMenuTemp;
     } else {
       // If subMenu is an object, return its keys
-      return Object.keys(subMenu);
+      return Object.keys(subMenuTemp);
     }
   };
 
@@ -58,10 +67,12 @@ const Menu = () => {
       },
     }).then(async function (response) {
       let res = await response.json();
-      setCompleteMenu(res);
+      // setCompleteMenu(res);
       const currentPath = location.pathname.replace("/menu", ""); // Remove the base path
 
-      setMenu(getSubMenu(res.menu, currentPath));
+      let tempVal = getSubMenu(res.menu, currentPath);
+      setMenu(tempVal);
+      console.log(JSON.stringify(tempVal));
     });
   };
 
@@ -112,114 +123,101 @@ const Menu = () => {
 
   return (
     <div className='h-screen w-screen flex flex-col overflow-scroll bg-slate-900 relative'>
-      {modalOpen && (
-        <div className=' absolute top-0 bottom-0 left-0 right-0 bg-slate-500 bg-opacity-60 z-50 flex items-center justify-center'>
-          <div className=' bg-white min-w-3/12 aspect-square flex flex-col items-center justify-start py-8 space-y-5 px-5 max-h-screen overflow-scroll'>
-            <p className=' text-xl font-semibold'>Select a table</p>
-            <div className=' grid grid-cols-5 gap-4'>
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
-                <div
-                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
-                  onClick={() => handleTableChange(val)}>
-                  {val}
-                </div>
-              ))}
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
-                <div
-                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
-                  onClick={() => handleTableChange(val)}>
-                  {val}
-                </div>
-              ))}
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val) => (
-                <div
-                  className='bg-white px-2 py-1 min-w-20 aspect-square flex items-center justify-center border cursor-pointer'
-                  onClick={() => handleTableChange(val)}>
-                  {val}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {showMenu && (
+        <div
+          className={` ease-in absolute top-0 right-0 bottom-0 w-full bg-black  py-4  z-40 delay-1000 transition-opacity ${
+            showMenu ? "opacity-25" : "opacity-0"
+          }`}></div>
       )}
+
+      <Modals
+        modalOpen={modalOpen}
+        handleTableChange={handleTableChange}
+        orderAllergy={orderAllergy}
+        setOrderAllergy={setOrderAllergy}
+        setAllergiesOption={setAllergiesOption}
+        allergiesOption={allergiesOption}
+      />
+
       <div className=' bg-slate-900 flex-1 flex flex-col-reverse md:flex-row overflow-scroll '>
         {/* top */}
 
         <div className=' bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block max-h-full overflow-scroll relative'>
           {/* Receipt */}
           <OrderList
+            orderAllergy={orderAllergy}
             groupedOrder={groupedOrder}
             setGroupedOrder={setGroupedOrder}
             handleAddMessage={handleAddMessage}
+            addToOrder={addToOrder}
           />
         </div>
 
-        <div className=' flex-1 flex flex-col'>
+        <div className=' flex-1 flex flex-row-reverse'>
           {/* right */}
 
-          <div className=' h-20 border-b border-white flex items-center justify-between text-white px-5'>
+          <div className=' w-1/6 border-b border-white grid grid-cols-1 items-stretch gap-3 justify-between text-white px-5 py-4'>
             <div className=' text-xl'>Logged in as : Kaustubh</div>
+            <button
+              onClick={() => setShowMenu((curr) => !curr)}
+              className='text-xl border p-3 cursor-pointer disabled:opacity-75'
+              disabled={showMenu}>
+              Menu
+            </button>
             <div
-              className=' text-xl border p-3 cursor-pointer'
+              className=' flex items-center justify-center text-xl border p-3 cursor-pointer'
               onClick={() => setModalOpen(true)}>
-              Table number:
-              <span> {tableNum}</span>
+              <p>
+                Table number:
+                <span> {tableNum}</span>
+              </p>
             </div>
 
-            <div className=' text-xl border p-3'>Some option1</div>
-            <div className=' text-xl border p-3'>Some option2</div>
-            <div className=' min-w-12 p-3 bg-white rounded-xl text-black flex flex-col space-y-0'>
-              Logout
-            </div>
-          </div>
-          <div
-            className={`flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
-              menu.length >= 3 ? " grid-cols-3 " : " grid-cols-2 "
-            } menu-content`}>
-            {/* body */}
-            {menu &&
-              menu?.map((item) =>
-                item.item_name ? (
-                  <div
-                    className=' text-lg md:text-xl w-2/12 max-w-32 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-sm m-2 relative flex-col space-y-2 shadow-slate-100'
-                    onClick={() => {
-                      addToOrder(item);
-                    }}>
-                    <div className=' py-2'>{item.item_name}</div>
-                    {/* <div className=' bg-orange-400  w-full'>
-                      {
-                        currentOrder.filter(
-                          (itm) => itm.item_name === item.item_name
-                        ).length
-                      }
-                    </div> */}
-                  </div>
-                ) : (
-                  <div
-                    className=' text-lg md:text-xl w-2/12 md:min-w-2/12 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-md m-2 '
-                    onClick={() => {
-                      navigate(`${location.pathname}/${item}`);
-                    }}>
-                    {item}
-                  </div>
-                )
-              )}
-          </div>
-          <div className=' border-t border-white px-5 py-2'>
             <div
-              className=' text-white float-right  px-8 py-3 rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'
+              className=' flex items-center justify-center  text-xl border p-3'
+              onClick={() => setAllergiesOption(true)}>
+              Allergies
+            </div>
+            <div className=' flex items-center justify-center  text-xl border p-3'>
+              Some option
+            </div>
+
+            <div
+              className=' flex items-center justify-center  text-white  bg-teal-400  p-3 active:shadow-none cursor-pointer text-xl'
               onClick={() => navigate(-1)}>
               Back
             </div>
           </div>
+          <div
+            className={`relative flex-1 md:flex md:flex-wrap items-center justify-around content-center grid ${
+              menu.length >= 3 ? " grid-cols-3 " : " grid-cols-2 "
+            } menu-content h-full overflow-scroll`}>
+            {/* body */}
+
+            {showMenu && (
+              <>
+                <Popover showMenu={showMenu} setShowMenu={setShowMenu} />
+              </>
+            )}
+            {/* {alert(JSON.stringify(breadcrumbs))} */}
+
+            <MenuItems
+              menu={menu}
+              addToOrder={addToOrder}
+              navigate={navigate}
+              location={location}
+              subMenu={subMenu}
+              breadcrumbs={breadcrumbs}
+            />
+          </div>
         </div>
       </div>
 
-      <div className=' bg-white md:h-max h-20 flex p-3 items-center'>
+      <div className=' bg-white md:h-max h-40 flex items-center p-1'>
         {/* bottom */}
         <div className=' flex-1'>
           <div
-            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center '
+            className=' px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center  text-3xl'
             onClick={() => {
               if (window.confirm("confirm")) {
                 setGroupedOrder([]);
@@ -231,14 +229,14 @@ const Menu = () => {
         </div>
         <div className=' flex items-center space-x-3'>
           <div
-            className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer'
+            className=' px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl'
             onClick={() => {
               navigate(`/menu`);
             }}>
             Home
           </div>
 
-          <div className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer'>
+          <div className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl'>
             Finish
           </div>
         </div>

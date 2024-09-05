@@ -2,7 +2,10 @@
   "cafe_name": "Sample! Cafe",
   "menu": {
     "drinks": {
+      "image_url": "https://www.southernliving.com/thmb/KeCJKnGWSNBdj1sG2CgfSjXlgjU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/watermelon-sweet-tea-27495_IK_drinks_212_edit_preview-e910a8594b7746b3b8da28229558882a.jpg",
       "hot_drinks": {
+        "image_url": "https://static.vecteezy.com/system/resources/previews/025/282/026/non_2x/stock-of-mix-a-cup-coffee-latte-more-motive-top-view-foodgraphy-generative-ai-photo.jpg",
+        "render_child_together": true,
         "coffee": [
           {
             "item_id": 1,
@@ -29,7 +32,12 @@
             "item_price_eat_in": 3.2,
             "item_price_takeaway": 3.2,
             "item_contents": "Milk, coffee",
-            "item_topic": "hot_drinks"
+            "item_topic": "hot_drinks",
+            "has_options": true,
+            "options": {
+              "syrups": ["vanilla", "hazelnut"],
+              "milks": ["oat", "almond", "coconut", "soya"]
+            }
           },
           {
             "item_id": 4,
@@ -117,6 +125,8 @@
         ]
       },
       "cold_drinks": {
+        "image_url": "https://images.ctfassets.net/l5fkpck1mwg3/6FUOi4hypIHEMW82MT5ewJ/ca94d8d554e425cbfc37270b0a2afde5/COKE_Bottled_DrinkAssortment_4000x3000.png",
+        "render_child_together": false,
         "shakes": [
           {
             "item_id": 88,
@@ -333,71 +343,231 @@
           "item_topic": "specials"
         }
       ],
-      "extras": [
-        {
-          "item_id": 34,
-          "item_name": "Sourdough Toast",
-          "item_description": "extra",
-          "item_price_eat_in": 2.0,
-          "item_price_takeaway": 2.0,
-          "item_contents": "Sourdough toast",
-          "item_topic": "extras"
-        },
-        {
-          "item_id": 35,
-          "item_name": "Feta",
-          "item_description": "extra",
-          "item_price_eat_in": 2.0,
-          "item_price_takeaway": 2.0,
-          "item_contents": "Feta cheese",
-          "item_topic": "extras"
-        },
-        {
-          "item_id": 36,
-          "item_name": "Homemade Beans",
-          "item_description": "extra",
-          "item_price_eat_in": 3.0,
-          "item_price_takeaway": 3.0,
-          "item_contents": "Homemade beans",
-          "item_topic": "extras"
-        },
-        {
-          "item_id": 37,
-          "item_name": "Hash Browns",
-          "item_description": "extra",
-          "item_price_eat_in": 3.0,
-          "item_price_takeaway": 3.0,
-          "item_contents": "Hash browns",
-          "item_topic": "extras"
-        },
-        {
-          "item_id": 38,
-          "item_name": "Full English Breakfast",
-          "item_description": "extra",
-          "item_price_eat_in": 7.0,
-          "item_price_takeaway": 7.0,
-          "item_contents": "English breakfast ingredients",
-          "item_topic": "extras"
-        },
-        {
-          "item_id": 39,
-          "item_name": "French Toast",
-          "item_description": "extra",
-          "item_price_eat_in": 4.5,
-          "item_price_takeaway": 4.5,
-          "item_contents": "French toast ingredients",
-          "item_topic": "extras"
-        },
-        {
-          "item_id": 40,
-          "item_name": "Cakes",
-          "item_description": "extra",
-          "item_price_eat_in": 3.5,
-          "item_price_takeaway": 3.5,
-          "item_contents": "Cake ingredients",
-          "item_topic": "extras"
-        }
-      ]
+      "extras": {
+        "render_child_together": true,
+        "cheese": [
+          {
+            "item_id": 35,
+            "item_name": "Feta",
+            "item_description": "extra",
+            "item_price_eat_in": 2.0,
+            "item_price_takeaway": 2.0,
+            "item_contents": "Feta cheese",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 99,
+            "item_name": "American cheese",
+            "item_description": "extra",
+            "item_price_eat_in": 2.0,
+            "item_price_takeaway": 2.0,
+            "item_contents": " cheese",
+            "item_topic": "extras"
+          }
+        ],
+
+        "others": [
+          {
+            "item_id": 34,
+            "item_name": "Sourdough Toast",
+            "item_description": "extra",
+            "item_price_eat_in": 2.0,
+            "item_price_takeaway": 2.0,
+            "item_contents": "Sourdough toast",
+            "item_topic": "extras"
+          },
+
+          {
+            "item_id": 36,
+            "item_name": "Homemade Beans",
+            "item_description": "extra",
+            "item_price_eat_in": 3.0,
+            "item_price_takeaway": 3.0,
+            "item_contents": "Homemade beans",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 37,
+            "item_name": "Hash Browns",
+            "item_description": "extra",
+            "item_price_eat_in": 3.0,
+            "item_price_takeaway": 3.0,
+            "item_contents": "Hash browns",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 38,
+            "item_name": "Full English Breakfast",
+            "item_description": "extra",
+            "item_price_eat_in": 7.0,
+            "item_price_takeaway": 7.0,
+            "item_contents": "English breakfast ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 39,
+            "item_name": "French Toast",
+            "item_description": "extra",
+            "item_price_eat_in": 4.5,
+            "item_price_takeaway": 4.5,
+            "item_contents": "French toast ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 38,
+            "item_name": "Full English Breakfast",
+            "item_description": "extra",
+            "item_price_eat_in": 7.0,
+            "item_price_takeaway": 7.0,
+            "item_contents": "English breakfast ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 39,
+            "item_name": "French Toast",
+            "item_description": "extra",
+            "item_price_eat_in": 4.5,
+            "item_price_takeaway": 4.5,
+            "item_contents": "French toast ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 38,
+            "item_name": "Full English Breakfast",
+            "item_description": "extra",
+            "item_price_eat_in": 7.0,
+            "item_price_takeaway": 7.0,
+            "item_contents": "English breakfast ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 39,
+            "item_name": "French Toast",
+            "item_description": "extra",
+            "item_price_eat_in": 4.5,
+            "item_price_takeaway": 4.5,
+            "item_contents": "French toast ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          },
+          {
+            "item_id": 40,
+            "item_name": "Cakes",
+            "item_description": "extra",
+            "item_price_eat_in": 3.5,
+            "item_price_takeaway": 3.5,
+            "item_contents": "Cake ingredients",
+            "item_topic": "extras"
+          }
+        ]
+      }
     }
   }
 }
