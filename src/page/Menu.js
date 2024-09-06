@@ -7,47 +7,24 @@ import "./Menu.css";
 import Popover from "../components/Popover";
 import Modals from "../components/Modals";
 import MenuItems from "../components/MenuItems";
+import { finishOrder, getData } from "../helper/menuHelper";
 
 const Menu = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [menu, setMenu] = useState([]);
 
+  const [menu, setMenu] = useState([]);
   const [groupedOrder, setGroupedOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
   const [subMenu, setSubMenu] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [tableNum, setTableNum] = useState(0);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [allergiesOption, setAllergiesOption] = useState(false);
+  const [tableModalOpen, setTableModalOpen] = useState(false);
+  const [allergiesModalOpen, setAllergiesModalOpen] = useState(false);
   const [orderAllergy, setOrderAllergy] = useState([]);
 
-  const [showMenu, setShowMenu] = useState(false);
-
-  const getSubMenu = (menu, subRoute) => {
-    let subMenuTemp = menu;
-
-    const routeParts = subRoute.split("/").filter((part) => part); // Split and filter out empty strings
-    setBreadcrumbs(["home", ...routeParts]);
-    for (const part of routeParts) {
-      if (subMenuTemp[part]) {
-        subMenuTemp = subMenuTemp[part];
-      } else {
-        // If the route part doesn't exist in the menu, return an empty object or handle the error as needed
-        return {};
-      }
-    }
-    console.log(subMenuTemp);
-    setSubMenu(subMenuTemp);
-    if (Array.isArray(subMenuTemp)) {
-      // If the subMenu is an array, return it as it is
-      return subMenuTemp;
-    } else {
-      // If subMenu is an object, return its keys
-      return Object.keys(subMenuTemp);
-    }
-  };
+  const [showExtraActions, setShowExtraActions] = useState(false);
 
   useEffect(() => {
     const user_dets = JSON.parse(localStorage.getItem("user_dets"));
@@ -59,84 +36,31 @@ const Menu = () => {
     }
   }, [location.pathname]);
 
-  const getData = () => {
-    fetch("/menu.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }).then(async function (response) {
-      let res = await response.json();
-      // setCompleteMenu(res);
-      const currentPath = location.pathname.replace("/menu", ""); // Remove the base path
-
-      let tempVal = getSubMenu(res.menu, currentPath);
-      setMenu(tempVal);
-      console.log(JSON.stringify(tempVal));
-    });
-  };
-
-  const handleAddMessage = (item, message) => {
-    let order = [...groupedOrder];
-
-    order.forEach((orderItem) => {
-      if (orderItem["item_name"] === item.item_name) {
-        orderItem["message"] = message;
-      }
-    });
-
-    setGroupedOrder(order);
-    localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
-  };
-
-  const addToOrder = (item) => {
-    let order = [...groupedOrder];
-    let found = false;
-
-    order.forEach((orderItem) => {
-      if (orderItem["item_name"] === item.item_name) {
-        orderItem["count"] += 1;
-        found = true;
-      }
-    });
-    if (!found) {
-      const newItem = { ...item, count: 1, message: "" };
-      order = [newItem].concat(groupedOrder);
-    }
-
-    setGroupedOrder(order);
-    localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
-  };
-
   useEffect(() => {
     setGroupedOrder(JSON.parse(localStorage.getItem("grouped_order")) || []);
   }, []);
 
   useEffect(() => {
-    getData();
+    getData(location, setSubMenu, setBreadcrumbs, setMenu);
   }, [location.pathname]);
-
-  const handleTableChange = (val) => {
-    setTableNum(val);
-    setModalOpen(false);
-  };
 
   return (
     <div className='h-screen w-screen flex flex-col overflow-scroll bg-slate-900 relative'>
-      {showMenu && (
+      {showExtraActions && (
         <div
           className={` ease-in absolute top-0 right-0 bottom-0 w-full bg-black  py-4  z-40 delay-1000 transition-opacity ${
-            showMenu ? "opacity-25" : "opacity-0"
+            showExtraActions ? "opacity-25" : "opacity-0"
           }`}></div>
       )}
 
       <Modals
-        modalOpen={modalOpen}
-        handleTableChange={handleTableChange}
+        tableModalOpen={tableModalOpen}
         orderAllergy={orderAllergy}
         setOrderAllergy={setOrderAllergy}
-        setAllergiesOption={setAllergiesOption}
-        allergiesOption={allergiesOption}
+        setAllergiesModalOpen={setAllergiesModalOpen}
+        allergiesModalOpen={allergiesModalOpen}
+        setTableNum={setTableNum}
+        setTableModalOpen={setTableModalOpen}
       />
 
       <div className=' bg-slate-900 flex-1 flex flex-col-reverse md:flex-row overflow-scroll '>
@@ -148,8 +72,6 @@ const Menu = () => {
             orderAllergy={orderAllergy}
             groupedOrder={groupedOrder}
             setGroupedOrder={setGroupedOrder}
-            handleAddMessage={handleAddMessage}
-            addToOrder={addToOrder}
           />
         </div>
 
@@ -159,14 +81,14 @@ const Menu = () => {
           <div className=' w-1/6 border-b border-white grid grid-cols-1 items-stretch gap-3 justify-between text-white px-5 py-4'>
             <div className=' text-xl'>Logged in as : Kaustubh</div>
             <button
-              onClick={() => setShowMenu((curr) => !curr)}
+              onClick={() => setShowExtraActions((curr) => !curr)}
               className='text-xl border p-3 cursor-pointer disabled:opacity-75'
-              disabled={showMenu}>
+              disabled={showExtraActions}>
               Menu
             </button>
             <div
               className=' flex items-center justify-center text-xl border p-3 cursor-pointer'
-              onClick={() => setModalOpen(true)}>
+              onClick={() => setTableModalOpen(true)}>
               <p>
                 Table number:
                 <span> {tableNum}</span>
@@ -175,7 +97,7 @@ const Menu = () => {
 
             <div
               className=' flex items-center justify-center  text-xl border p-3'
-              onClick={() => setAllergiesOption(true)}>
+              onClick={() => setAllergiesModalOpen(true)}>
               Allergies
             </div>
             <div className=' flex items-center justify-center  text-xl border p-3'>
@@ -184,7 +106,13 @@ const Menu = () => {
 
             <div
               className=' flex items-center justify-center  text-white  bg-teal-400  p-3 active:shadow-none cursor-pointer text-xl'
-              onClick={() => navigate(-1)}>
+              onClick={() => {
+                if (
+                  location.pathname !== "/menu/" &&
+                  location.pathname !== "/menu"
+                )
+                  navigate(-1);
+              }}>
               Back
             </div>
           </div>
@@ -194,20 +122,24 @@ const Menu = () => {
             } menu-content h-full overflow-scroll`}>
             {/* body */}
 
-            {showMenu && (
+            {showExtraActions && (
               <>
-                <Popover showMenu={showMenu} setShowMenu={setShowMenu} />
+                <Popover
+                  showExtraActions={showExtraActions}
+                  setShowExtraActions={setShowExtraActions}
+                />
               </>
             )}
             {/* {alert(JSON.stringify(breadcrumbs))} */}
 
             <MenuItems
               menu={menu}
-              addToOrder={addToOrder}
               navigate={navigate}
               location={location}
               subMenu={subMenu}
               breadcrumbs={breadcrumbs}
+              groupedOrder={groupedOrder}
+              setGroupedOrder={setGroupedOrder}
             />
           </div>
         </div>
@@ -236,7 +168,9 @@ const Menu = () => {
             Home
           </div>
 
-          <div className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl'>
+          <div
+            className=' px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl'
+            onClick={() => finishOrder(groupedOrder, orderAllergy, tableNum)}>
             Finish
           </div>
         </div>

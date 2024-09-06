@@ -4,70 +4,25 @@ import {
   SwipeableListItem,
 } from "@sandstreamdev/react-swipeable-list";
 import "@sandstreamdev/react-swipeable-list/dist/styles.css";
-
-// Custom function to group items by a key
-// const groupBy = (array, key) => {
-//   return array.reduce((result, currentValue) => {
-//     (result[currentValue[key]] = result[currentValue[key]] || []).push(
-//       currentValue
-//     );
-//     return result;
-//   }, {});
-// };
-
-const OrderList = ({
-  groupedOrder,
-  setGroupedOrder,
-  handleAddMessage,
-  orderAllergy,
+import {
   addToOrder,
-}) => {
-  // const [groupedOrder, setGroupedOrder] = useState({});
+  handleAddMessage,
+  handleDelete,
+  removeOnceFromOrder,
+} from "../helper/menuHelper";
 
-  // useEffect(() => {
-  //   // Use the custom groupBy function
-  //   const grouped = groupBy(currOrder, "item_name");
-  //   setGroupedOrder(grouped);
-  // }, [currOrder]);
-
-  const handleDelete = (item_name) => {
-    let newOrder = groupedOrder.filter((item) => item.item_name !== item_name);
-    setGroupedOrder(newOrder);
-    localStorage.setItem("grouped_order", JSON.stringify(newOrder));
-  };
-
-  const removeOnceFromOrder = (item) => {
-    let order = [...groupedOrder];
-
-    order.forEach((orderItem) => {
-      if (orderItem["item_name"] === item.item_name) {
-        if (orderItem["count"] == 1) {
-          handleDelete(orderItem["item_name"]);
-          return;
-        } else {
-          orderItem["count"] -= 1;
-          setGroupedOrder(order);
-          localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
-          return;
-        }
-      }
-    });
-  };
-
+const OrderList = ({ groupedOrder, setGroupedOrder, orderAllergy }) => {
   const swipeLeftDataSimple = (item_name) => ({
     content: (
       <div className=' bg-red-500 text-end w-full text-white font-semibold px-2 py-3'>
         <span>Delete</span>
       </div>
     ),
-    action: () => handleDelete(item_name),
+    action: () => handleDelete(item_name, groupedOrder, setGroupedOrder),
   });
   return (
     <div className='h-full py-2 flex flex-col divide-y-2 overflow-scroll'>
       <p className=' px-2w-full text-xl'>Order till now</p>
-      {/* <p className=' bg-red-100'>
-        Allergies:<span className=' pl-2'>{orderAllergy.toString()}</span>
-      </p> */}
       <div className='flex-1 space-y-3 pb-10'>
         <SwipeableList className='flex flex-col-reverse'>
           {groupedOrder.map((item) => {
@@ -78,7 +33,9 @@ const OrderList = ({
                 <div className='w-full flex items-stretch justify-between'>
                   <div
                     className=' flex flex-col  justify-around items-center cursor-pointer'
-                    onClick={() => removeOnceFromOrder(item)}>
+                    onClick={() =>
+                      removeOnceFromOrder(item, groupedOrder, setGroupedOrder)
+                    }>
                     <div className='  px-3 py-2 text-3xl'>-</div>
                   </div>
                   <div className=' bg-slate-200 flex-1 py-3 border-dashed border-b flex flex-col px-2 border-r-2 border-l-2'>
@@ -99,12 +56,21 @@ const OrderList = ({
                       type='text'
                       placeholder='notes'
                       value={item.message}
-                      onChange={(e) => handleAddMessage(item, e.target.value)}
+                      onChange={(e) =>
+                        handleAddMessage(
+                          item,
+                          e.target.value,
+                          groupedOrder,
+                          setGroupedOrder
+                        )
+                      }
                     />
                   </div>
                   <div
                     className=' flex flex-col  justify-around items-center cursor-pointer'
-                    onClick={() => addToOrder(item)}>
+                    onClick={() =>
+                      addToOrder(item, groupedOrder, setGroupedOrder)
+                    }>
                     <div className=' px-3 py-2 text-2xl '>+</div>
                   </div>
                 </div>
