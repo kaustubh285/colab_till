@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const Popover = ({ showMenu, setShowMenu }) => {
+const Popover = ({ showExtraActions, setShowExtraActions }) => {
   const [isVisible, setIsVisible] = useState(false); // Manages the visibility state of the popover
   const popoverRef = useRef(null); // Reference to the popover element
   const triggerRef = useRef(null); // Reference to the button element that triggers the popover
@@ -12,7 +12,7 @@ const Popover = ({ showMenu, setShowMenu }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
-        setShowMenu(false);
+        setShowExtraActions(false);
         // Close the popover if clicked outside
       }
     };
@@ -47,7 +47,7 @@ const Popover = ({ showMenu, setShowMenu }) => {
       </div>
       <button
         className=' absolute bottom-0 right-0 left-0 py-3  bg-gray-600 text-white hover:bg-gray-700'
-        onClick={() => setShowMenu(false)}>
+        onClick={() => setShowExtraActions(false)}>
         Close Menu
       </button>
     </div>

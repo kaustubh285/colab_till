@@ -1,13 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ItemOptions from "./ItemOptions";
+import { addToOrder } from "../helper/menuHelper";
 
 const MenuItems = ({
   menu,
-  addToOrder,
   navigate,
   location,
   subMenu,
   breadcrumbs,
+  groupedOrder,
+  setGroupedOrder,
 }) => {
   const meta_data_list = ["render_child_together", "image_url"];
   const [showOptions, setShowOptions] = useState(false);
@@ -19,7 +21,7 @@ const MenuItems = ({
       setSelectedItem(item);
       setShowOptions(true);
     } else {
-      addToOrder(item);
+      addToOrder(item, groupedOrder, setGroupedOrder);
     }
   };
 
@@ -57,126 +59,6 @@ const MenuItems = ({
     const currMenu = getCurrentMenuSection(breadcrumbs);
 
     if (currMenu !== undefined) {
-      let val = {
-        render_child_together: true,
-        coffee: [
-          {
-            item_id: 1,
-            item_name: "Espresso",
-            item_description: "coffee",
-            item_price_eat_in: 2.6,
-            item_price_takeaway: 2.6,
-            item_contents: "Espresso coffee",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 2,
-            item_name: "Flat White",
-            item_description: "coffee",
-            item_price_eat_in: 3.2,
-            item_price_takeaway: 3.2,
-            item_contents: "Milk, coffee",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 3,
-            item_name: "Latte",
-            item_description: "coffee",
-            item_price_eat_in: 3.2,
-            item_price_takeaway: 3.2,
-            item_contents: "Milk, coffee",
-            item_topic: "hot_drinks",
-            has_options: true,
-            options: {
-              syrups: ["vanilla", "hazelnut"],
-              milks: ["oat", "almond", "coconut", "soya"],
-            },
-          },
-          {
-            item_id: 4,
-            item_name: "Cappuccino",
-            item_description: "coffee",
-            item_price_eat_in: 3.2,
-            item_price_takeaway: 3.2,
-            item_contents: "Milk, coffee",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 5,
-            item_name: "Mocha",
-            item_description: "coffee",
-            item_price_eat_in: 3.5,
-            item_price_takeaway: 3.5,
-            item_contents: "Milk, coffee, chocolate",
-            item_topic: "hot_drinks",
-          },
-        ],
-        others: [
-          {
-            item_id: 6,
-            item_name: "Chai Latte",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.3,
-            item_price_takeaway: 3.3,
-            item_contents: "Milk, chai spices",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 7,
-            item_name: "Matcha Latte",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.3,
-            item_price_takeaway: 3.3,
-            item_contents: "Milk, matcha",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 8,
-            item_name: "Turmeric Latte",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.3,
-            item_price_takeaway: 3.3,
-            item_contents: "Milk, turmeric",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 9,
-            item_name: "Beetroot Latte",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.3,
-            item_price_takeaway: 3.3,
-            item_contents: "Milk, beetroot",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 10,
-            item_name: "Chai Matcha",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.5,
-            item_price_takeaway: 3.5,
-            item_contents: "Milk, chai spices, matcha",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 11,
-            item_name: "Hot Chocolate",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.5,
-            item_price_takeaway: 3.5,
-            item_contents: "Milk, chocolate",
-            item_topic: "hot_drinks",
-          },
-          {
-            item_id: 12,
-            item_name: "Lotus Hot Choc",
-            item_description: "other_hot_drinks",
-            item_price_eat_in: 3.75,
-            item_price_takeaway: 3.75,
-            item_contents: "Milk, chocolate, lotus biscoff",
-            item_topic: "hot_drinks",
-          },
-        ],
-      };
       setCurrentMenuSection(menu);
     } else {
       // Handle the case where the path is invalid
@@ -206,13 +88,6 @@ const MenuItems = ({
                     className={` grid ${no_of_sub_cols} h-full items-stretch  justify-start `}>
                     {categoryItems.map((item) => (
                       <>
-                        {/* <div
-                      key={item.item_id}
-                      className='bg-white p-2 rounded shadow cursor-pointer'
-                      onClick={() => checkIfMultiOption(item)}>
-                      {item.item_name} - ${item.item_price_eat_in}
-                    </div> */}
-
                         <div
                           key={item.item_id}
                           className='bg-white p-1 rounded shadow cursor-pointer m-2 px-2 py-1 w-32 flex items-center justify-center max-h-32'
@@ -235,12 +110,7 @@ const MenuItems = ({
       </div>
     );
   };
-  try {
-    if (menu.includes("Hello")) {
-    }
-  } catch {
-    console.log(JSON.stringify(menu));
-  }
+
   return (
     <>
       {showOptions ? (
@@ -249,24 +119,7 @@ const MenuItems = ({
         menu &&
         (menu.includes("render_child_together") &&
         subMenu.render_child_together ? (
-          <>
-            {/* <div className={` grid grid-cols-1 ${menu.length - 1}`}>
-              {menu?.map(
-                (item) =>
-                  item !== "render_child_together" && (
-                    <div className=' text-white'>
-                      <p className=' text-3xl'>{item}</p>
-                      <p>{JSON.stringify(subMenu)}1111</p>
-                      {subMenu.item?.map((sub_item) => {
-                        <div>{sub_item}</div>;
-                      })}
-                    </div>
-                  )
-              )}
-            </div> */}
-
-            {renderGridItems()}
-          </>
+          <>{renderGridItems()}</>
         ) : (
           menu?.map((item) =>
             item.item_name ? (
@@ -280,13 +133,6 @@ const MenuItems = ({
                     ${item.item_price_eat_in}
                   </div>
                 </div>
-                {/* <div
-                  className=' text-lg md:text-xl w-2/12 max-w-32 text-center justify-center items-center flex aspect-square active:shadow-none cursor-pointer bg-blue-200 px-4 py-2 rounded-lg shadow-sm m-2 relative flex-col space-y-2 shadow-slate-100'
-                  onClick={() => {
-                    checkIfMultiOption(item);
-                  }}>
-                  <div className=' py-2'>{item.item_name}</div>
-                </div> */}
               </>
             ) : (
               !meta_data_list.includes(item) &&
