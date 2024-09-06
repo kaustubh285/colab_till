@@ -31,8 +31,8 @@ const Menu = () => {
 
     setUserDets(user_dets);
     if (!user_dets) {
-      setUserDets({ id: 2, name: "Kaustubh", code: "696" });
-      // navigate("/");
+      // setUserDets({ id: 2, name: "Kaustubh", code: "696" });
+      navigate("/");
     }
   }, [location.pathname]);
 
@@ -79,7 +79,14 @@ const Menu = () => {
           {/* right */}
 
           <div className=' w-1/6 border-b border-white grid grid-cols-1 items-stretch gap-3 justify-between text-white px-5 py-4'>
-            <div className=' text-xl'>Logged in as : Kaustubh</div>
+            <div
+              className=' text-xl'
+              onClick={() => {
+                setUserDets({});
+                navigate("/");
+              }}>
+              Logged in as : {userDets.name}
+            </div>
             <button
               onClick={() => setShowExtraActions((curr) => !curr)}
               className='text-xl border p-3 cursor-pointer disabled:opacity-75'
