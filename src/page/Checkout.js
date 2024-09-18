@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
 import MenuNav from "../components/MenuNav";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import MenuFeatures from "../components/MenuFeatures";
 import OrderList from "../components/OrderList";
 import "./Menu.css";
 import Popover from "../components/Popover";
 import Modals from "../components/Modals";
-import MenuItems from "../components/MenuItems";
 import { finishOrder, getData } from "../helper/menuHelper";
-
-const Menu = () => {
+import CheckoutMain from "../components/CheckoutMain";
+function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [menu, setMenu] = useState([]);
   const [groupedOrder, setGroupedOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
-
-  const [subMenu, setSubMenu] = useState([]);
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [tableNum, setTableNum] = useState(0);
 
   const [tableModalOpen, setTableModalOpen] = useState(false);
@@ -26,6 +21,16 @@ const Menu = () => {
   const [orderAllergy, setOrderAllergy] = useState([]);
 
   const [showExtraActions, setShowExtraActions] = useState(false);
+
+  const [subtotal, setSubtotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const updateOrderList = (newSubtotal, newDiscount, newTotal) => {
+    setSubtotal(newSubtotal);
+    setDiscount(newDiscount);
+    setTotal(newTotal);
+  };
 
   useEffect(() => {
     const user_dets = JSON.parse(localStorage.getItem("user_dets"));
@@ -40,11 +45,6 @@ const Menu = () => {
   useEffect(() => {
     setGroupedOrder(JSON.parse(localStorage.getItem("grouped_order")) || []);
   }, []);
-
-  useEffect(() => {
-    getData(location, setSubMenu, setBreadcrumbs, setMenu);
-  }, [location.pathname]);
-
   return (
     <div className="h-screen w-screen flex flex-col overflow-scroll bg-slate-900 relative">
       {showExtraActions && (
@@ -65,20 +65,22 @@ const Menu = () => {
         setTableModalOpen={setTableModalOpen}
       />
 
-      <div className=" bg-slate-900 flex-1 flex flex-col-reverse md:flex-row overflow-scroll scrollbar-hide">
+      <div className=" bg-slate-900 flex-1 flex flex-col-reverse md:flex-row overflow-scroll ">
         {/* top */}
 
-        <div className=" bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block max-h-full overflow-scroll scrollbar-hide relative">
+        <div className=" bg-slate-50 w-full min-h-16 md:h-full md:w-3/12 hidden md:block max-h-full overflow-scroll relative">
           {/* Receipt */}
           <OrderList
             orderAllergy={orderAllergy}
             groupedOrder={groupedOrder}
             setGroupedOrder={setGroupedOrder}
-            menuScreen="true"
+            subtotal={subtotal}
+            discount={discount}
+            total={total}
           />
         </div>
 
-        <div className=" flex-1 flex flex-row-reverse ">
+        <div className=" flex-1 flex flex-row-reverse">
           {/* right */}
 
           <div className=" w-1/6 border-b border-white grid grid-cols-1 items-stretch gap-3 justify-between text-white px-5 py-4">
@@ -146,16 +148,9 @@ const Menu = () => {
                 />
               </>
             )}
-            {/* {alert(JSON.stringify(breadcrumbs))} */}
-
-            <MenuItems
-              menu={menu}
-              navigate={navigate}
-              location={location}
-              subMenu={subMenu}
-              breadcrumbs={breadcrumbs}
-              groupedOrder={groupedOrder}
-              setGroupedOrder={setGroupedOrder}
+            <CheckoutMain
+              cartItems={groupedOrder}
+              updateOrderList={updateOrderList}
             />
           </div>
         </div>
@@ -163,7 +158,7 @@ const Menu = () => {
 
       <div className=" bg-white md:h-max h-40 flex items-center p-1">
         {/* bottom */}
-        <div className=" flex-1 p-2 sm:p-4">
+        <div className=" flex-1">
           <div
             className=" px-8 py-3 text-white rounded-md bg-red-400 h-max shadow-md active:shadow-none cursor-pointer w-52 text-center  text-3xl"
             onClick={() => {
@@ -188,10 +183,7 @@ const Menu = () => {
 
           <div
             className=" px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
-            onClick={() => {
-              finishOrder(groupedOrder, orderAllergy, tableNum);
-              navigate("/checkout");
-            }}
+            onClick={() => finishOrder(groupedOrder, orderAllergy, tableNum)}
           >
             Finish
           </div>
@@ -199,6 +191,6 @@ const Menu = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Menu;
+export default Checkout;

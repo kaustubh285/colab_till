@@ -3,7 +3,7 @@ export const finishOrder = (
   orderAllergy,
   tableNum,
   payment_method = "card",
-  emp_name = "{emp_name}",
+  emp_name = localStorage.getItem("user_dets").name,
   paid = true
 ) => {
   let order = {
@@ -12,6 +12,7 @@ export const finishOrder = (
     time: new Date(),
     paid: paid,
     payment_method: payment_method,
+    prepared: false,
     table_no: tableNum,
     emp_name: emp_name,
   };
@@ -73,7 +74,7 @@ export const addToOrder = (item, groupedOrder, setGroupedOrder) => {
   }
 
   setGroupedOrder(order);
-  localStorage.setItem("grouped_order", JSON.stringify(groupedOrder));
+  localStorage.setItem("grouped_order", JSON.stringify(order));
 };
 
 export const handleDelete = (item_name, groupedOrder, setGroupedOrder) => {
