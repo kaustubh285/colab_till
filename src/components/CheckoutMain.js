@@ -23,7 +23,7 @@ function CheckoutMain({ cartItems, updateOrderList }) {
 
   useEffect(() => {
     calculateTotals();
-  }, [cartItems, discountType, customDiscount]);
+  }, [cartItems, discountType, customDiscount, paymentMethod]);
 
   useEffect(() => {
     if (paymentMethod === "cash" && cashInput) {
@@ -69,8 +69,10 @@ function CheckoutMain({ cartItems, updateOrderList }) {
     setDiscount(newDiscount);
     setTotal(newTotal);
 
+    console.log("payment Method ", paymentMethod);
+
     // Update OrderList
-    updateOrderList(newSubtotal, newDiscount, newTotal);
+    updateOrderList(newSubtotal, newDiscount, newTotal, paymentMethod);
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import MenuNav from "../components/MenuNav";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import OrderList from "../components/OrderList";
 import "./Menu.css";
@@ -14,7 +13,7 @@ function Checkout() {
   const [menu, setMenu] = useState([]);
   const [groupedOrder, setGroupedOrder] = useState([]);
   const [userDets, setUserDets] = useState({});
-  const [tableNum, setTableNum] = useState(0);
+  const [tableNum, setTableNum] = useState(location.state?.tableNum || 0);
 
   const [tableModalOpen, setTableModalOpen] = useState(false);
   const [allergiesModalOpen, setAllergiesModalOpen] = useState(false);
@@ -25,11 +24,14 @@ function Checkout() {
   const [subtotal, setSubtotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("card");
+  const orderId = location.state?.orderId;
 
-  const updateOrderList = (newSubtotal, newDiscount, newTotal) => {
+  const updateOrderList = (newSubtotal, newDiscount, newTotal, payMethod) => {
     setSubtotal(newSubtotal);
     setDiscount(newDiscount);
     setTotal(newTotal);
+    setPaymentMethod(payMethod);
   };
 
   useEffect(() => {
@@ -127,7 +129,9 @@ function Checkout() {
                   location.pathname !== "/menu/" &&
                   location.pathname !== "/menu"
                 )
-                  navigate(-1);
+                  navigate(-1, {
+                    state: { orderId: orderId, tableNum: tableNum },
+                  });
               }}
             >
               Back
@@ -175,7 +179,9 @@ function Checkout() {
           <div
             className=" px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
             onClick={() => {
-              navigate(`/menu`);
+              navigate(`/menu`, {
+                state: { orderId: orderId, tableNum: tableNum },
+              });
             }}
           >
             Home
@@ -183,9 +189,18 @@ function Checkout() {
 
           <div
             className=" px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
-            onClick={() => finishOrder(groupedOrder, orderAllergy, tableNum)}
+            onClick={() =>
+              finishOrder(
+                groupedOrder,
+                orderAllergy,
+                tableNum,
+                paymentMethod,
+                total,
+                orderId
+              )
+            }
           >
-            Finish
+            Order Now
           </div>
         </div>
       </div>

@@ -2,7 +2,9 @@ export const finishOrder = (
   groupedOrder,
   orderAllergy,
   tableNum,
-  payment_method = "card",
+  paymentMethod,
+  total,
+  orderId,
   emp_name = localStorage.getItem("user_dets").name,
   paid = true
 ) => {
@@ -11,12 +13,35 @@ export const finishOrder = (
     allergies: orderAllergy,
     time: new Date(),
     paid: paid,
-    payment_method: payment_method,
-    prepared: false,
+    payment_method: paymentMethod,
     table_no: tableNum,
+    order_id: orderId,
     emp_name: emp_name,
+    total: total,
   };
   console.log(order);
+
+  const url = "http://localhost:8000/order/create-order/";
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(order),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Order created successfully:", data);
+    })
+    .catch((error) => {
+      console.error("Error creating order:", error);
+    });
 };
 
 export const getSubMenu = (menu, subRoute, setSubMenu, setBreadcrumbs) => {
@@ -69,7 +94,7 @@ export const addToOrder = (item, groupedOrder, setGroupedOrder) => {
     }
   });
   if (!found) {
-    const newItem = { ...item, count: 1, message: "" };
+    const newItem = { ...item, count: 1, message: "", prepared: false };
     order = [newItem].concat(groupedOrder);
   }
 

@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Unauth />} />
           <Route path="/menu/*" element={<Menu />} />
           <Route path="/dashboard/" element={<Dashboard />} />
-          <Route path="/checkout/" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -19,7 +19,7 @@ const Menu = () => {
 
   const [subMenu, setSubMenu] = useState([]);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [tableNum, setTableNum] = useState(0);
+  const [tableNum, setTableNum] = useState(location.state?.tableNum || 0);
 
   const [tableModalOpen, setTableModalOpen] = useState(false);
   const [allergiesModalOpen, setAllergiesModalOpen] = useState(false);
@@ -189,8 +189,11 @@ const Menu = () => {
           <div
             className=" px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
             onClick={() => {
-              finishOrder(groupedOrder, orderAllergy, tableNum);
-              navigate("/checkout");
+              // finishOrder(groupedOrder, orderAllergy, tableNum);${}
+              const orderId = Math.floor(1000 + Math.random() * 9000);
+              navigate("/checkout", {
+                state: { orderId: orderId, tableNum: tableNum },
+              });
             }}
           >
             Finish

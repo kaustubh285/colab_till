@@ -17,35 +17,11 @@ const Keypad = ({
     "7",
     "8",
     "9",
-    "clear",
     "0",
+    ".",
     "<",
+    "clear",
   ];
-
-  const handleClick = (val) => {
-    if (input + val === "") {
-      setInput("");
-      return;
-    }
-    // Guard clause wont let the code go ahead without this requirement
-    // if (Number(input + val) > 10000 || Number(input + val) < 0) return;
-
-    if (keypadValues.includes(val)) {
-      if (val === "clear") {
-        setInput("");
-        return;
-      }
-      if (val === "<") {
-        setInput((current) => {
-          return current.slice(0, current.length - 1);
-        });
-        return;
-      }
-      setInput((current) => {
-        return current + val;
-      });
-    }
-  };
 
   const handleInputChange = (val) => {
     // When val is an event object from onChange
@@ -58,17 +34,24 @@ const Keypad = ({
         setInput(newValue);
       }
     } else {
-      if (Number(input + val) > 10000 || Number(input + val) < 0) return;
       // When val is a string from keypadValues
       if (val === "clear") {
         setInput("");
       } else if (val === "<") {
         setInput((current) => current.slice(0, current.length - 1));
+      } else if (val === ".") {
+        if (!input.includes(".")) {
+          setInput((current) => current + val);
+        }
       } else {
-        setInput((current) => current + val);
+        const newValue = input + val;
+        if (Number(newValue) >= 0 && Number(newValue) < 10000) {
+          setInput(newValue);
+        }
       }
     }
   };
+
   if (isCheckout) {
     return (
       <div className="w-full">
@@ -82,7 +65,7 @@ const Keypad = ({
                   (value === "<"
                     ? " bg-red-300 "
                     : value === "clear"
-                      ? " bg-blue-300 "
+                      ? " bg-blue-300 col-span-3"
                       : " bg-white")
                 }
                 onClick={() => handleInputChange(value)}
@@ -102,8 +85,8 @@ const Keypad = ({
             placeholder="Enter emp till code here to login or clock-in..."
             className="text-black bg-white h-20 text-center"
             value={input}
-            type="number"
-            onChange={handleInputChange}
+            type="text"
+            onChange={(e) => handleInputChange(e)}
           />
           <div className="grid grid-cols-3 gap-3 text-center">
             {keypadValues.map((value) => (
