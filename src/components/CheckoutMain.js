@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Keypad from './Keypad';
 
-function CheckoutMain({ cartItems, updateOrderList }) {
+function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
     const [paymentMethod, setPaymentMethod] = useState('card');
-    const [cardType, setCardType] = useState('non-integrated');
+    const [cardType, setCardType] = useState('');
     const [discountType, setDiscountType] = useState('0');
     const [customDiscount, setCustomDiscount] = useState('');
     const [subtotal, setSubtotal] = useState(0);
@@ -50,13 +50,13 @@ function CheckoutMain({ cartItems, updateOrderList }) {
 
         switch (discountType) {
             case '5':
-                discountPercentage = 0.1;
+                discountPercentage = 0.05;
                 break;
             case '10':
-                discountPercentage = 0.2;
+                discountPercentage = 0.1;
                 break;
             case '15':
-                discountPercentage = 0.5;
+                discountPercentage = 0.15;
                 break;
             case 'custom':
                 discountPercentage = parseFloat(customDiscount) / 100 || 0;
@@ -78,6 +78,44 @@ function CheckoutMain({ cartItems, updateOrderList }) {
         updateOrderList(newSubtotal, newDiscount, newTotal, paymentMethod);
     };
 
+    useEffect(() => {
+        if (discountType !== 'custom') {
+            setCustomDiscount('');
+        }
+    }, [discountType]);
+
+    const paymentSubmit = (submissionType) => {
+        let tableStr =
+            tableNum === 'takeaway' ? 'takeaway' : `table number ${tableNum}`;
+        let confirmMsg =
+            submissionType === 'later'
+                ? `Would you like to place a 'pay-later' order for ${tableStr} with outstanding amount : ${total}$`
+                : `Confirm payment of ${total} for ${tableStr}`;
+        if (window.confirm(confirmMsg)) {
+            switch (submissionType) {
+                case 'later':
+                    break;
+                case 'now':
+                    console.log('in now');
+                    if (changeOrDue.amount > 0) {
+                        alert(
+                            `Amount ${changeOrDue.amount.toFixed(2)} due. Payment not confirmed`,
+                        );
+                    }
+                    break;
+                default:
+                    console.log('in default');
+                    break;
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (customDiscount > 100) {
+            setCustomDiscount('100');
+        }
+    }, [customDiscount]);
+
     return (
         <>
             <div className="w-full py-14 px-8 pb-26  h-full">
@@ -89,10 +127,33 @@ function CheckoutMain({ cartItems, updateOrderList }) {
                             <div className=" text-2xl font-semibold flex items-center  col-span-2">
                                 Card
                             </div>
-                            <div className={`${boxClass} col-span-2`}>
+                            <div
+                                className={`${boxClass} col-span-2`}
+                                onClick={() => {
+                                    setCashInput('');
+                                    setChangeOrDue({ amount: 0, type: 'none' });
+                                    setCardType('integrated');
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        cardType === 'integrated' && '#42eb6f',
+                                }}
+                            >
                                 Integrated Card
                             </div>
-                            <div className={`${boxClass} col-span-2`}>
+                            <div
+                                className={`${boxClass} col-span-2`}
+                                onClick={() => {
+                                    setCashInput('');
+                                    setChangeOrDue({ amount: 0, type: 'none' });
+                                    setCardType('non-integrated');
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        cardType === 'non-integrated' &&
+                                        '#42eb6f',
+                                }}
+                            >
                                 Non-Integrated Card
                             </div>
 
@@ -103,7 +164,10 @@ function CheckoutMain({ cartItems, updateOrderList }) {
                             </div>
                             <div
                                 className={`${boxClass} col-span-2 flex flex-col justify-evenly items-center`}
-                                onClick={() => setActiveInput('cash')}
+                                onClick={() => {
+                                    setCardType(null);
+                                    setActiveInput('cash');
+                                }}
                             >
                                 <p>Amount paid</p>
                                 <input
@@ -114,7 +178,10 @@ function CheckoutMain({ cartItems, updateOrderList }) {
                                     }
                                     placeholder="Enter cash amount"
                                     className="w-full p-2  bg-slate-200 outline-none text-center"
-                                    onFocus={() => setActiveInput('cash')}
+                                    onFocus={() => {
+                                        setCardType(null);
+                                        setActiveInput('cash');
+                                    }}
                                 />
                             </div>
                             <div
@@ -139,60 +206,113 @@ function CheckoutMain({ cartItems, updateOrderList }) {
                             </div>
                             <div
                                 className={boxClass}
-                                onClick={() => setDiscountType('5')}
+                                onClick={() => {
+                                    discountType !== '5'
+                                        ? setDiscountType('5')
+                                        : setDiscountType('0');
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        discountType === '5' && '#42eb6f',
+                                }}
                             >
                                 5%
                             </div>
                             <div
                                 className={boxClass}
-                                onClick={() => setDiscountType('10')}
+                                onClick={() => {
+                                    discountType !== '10'
+                                        ? setDiscountType('10')
+                                        : setDiscountType('0');
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        discountType === '10' && '#42eb6f',
+                                }}
                             >
                                 10%
                             </div>
                             <div
                                 className={boxClass}
-                                onClick={() => setDiscountType('15')}
+                                onClick={() => {
+                                    discountType !== '15'
+                                        ? setDiscountType('15')
+                                        : setDiscountType('0');
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        discountType === '15' && '#42eb6f',
+                                }}
                             >
                                 15%
                             </div>
                             <div
-                                className={boxClass}
+                                className={`${boxClass}`}
                                 onClick={() => {
-                                    setDiscountType('custom');
-                                    setActiveInput('discount');
+                                    if (discountType === 'custom')
+                                        setDiscountType('0');
+                                    else {
+                                        setDiscountType('custom');
+                                        setActiveInput('discount');
+                                    }
+                                }}
+                                style={{
+                                    backgroundColor:
+                                        discountType === 'custom' && '#42eb6f',
                                 }}
                             >
                                 <input
                                     type="number"
                                     value={customDiscount}
-                                    onChange={(e) =>
-                                        setCustomDiscount(e.target.value)
-                                    }
+                                    onChange={(e) => {
+                                        e.target.value > 0 &&
+                                            setCustomDiscount(e.target.value);
+                                    }}
                                     placeholder="Custom"
-                                    className="w-full p-2 bg-slate-200 outline-none text-center"
+                                    className=" flex-1 p-2 pr-0 m-0 bg-transparent  outline-none text-end"
+                                    style={{
+                                        maxWidth: '50%',
+                                    }}
                                     onFocus={() => setActiveInput('discount')}
                                 />
+                                {discountType === 'custom' &&
+                                    customDiscount && (
+                                        <div className=" flex-1">%</div>
+                                    )}
                             </div>
                         </div>
                     </div>
 
-                    <div className="bottom flex">
+                    <div className="bottom flex space-x-4">
                         <div className="bottom-left flex-1">
                             <Keypad
                                 input={
-                                    activeInput === 'cash'
-                                        ? cashInput
-                                        : customDiscount
+                                    activeInput === 'discount'
+                                        ? customDiscount
+                                        : cashInput
                                 }
                                 setInput={
-                                    activeInput === 'cash'
-                                        ? setCashInput
-                                        : setCustomDiscount
+                                    activeInput === 'discount'
+                                        ? setCustomDiscount
+                                        : setCashInput
                                 }
                                 isCheckout={true}
                             />
                         </div>
-                        <div className="bottom-right flex-1">Pay</div>
+                        <div className="bottom-right flex-1 flex flex-col items-center justify-end space-y-5">
+                            <div
+                                className="bg-amber-400 w-full mx-3 py-3 text-center font-semibold text-2xl text-black rounded-md"
+                                onClick={() => paymentSubmit('later')}
+                            >
+                                PAY LATER
+                            </div>
+                            <div
+                                className="bg-green-500 w-full mx-3 py-3 text-center font-semibold text-2xl text-white rounded-md"
+                                onClick={() => paymentSubmit('now')}
+                            >
+                                PAY
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
