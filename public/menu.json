@@ -1,573 +1,631 @@
 {
-  "cafe_name": "Sample! Cafe",
-  "menu": {
-    "drinks": {
-      "image_url": "https://www.southernliving.com/thmb/KeCJKnGWSNBdj1sG2CgfSjXlgjU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/watermelon-sweet-tea-27495_IK_drinks_212_edit_preview-e910a8594b7746b3b8da28229558882a.jpg",
-      "hot_drinks": {
-        "image_url": "https://static.vecteezy.com/system/resources/previews/025/282/026/non_2x/stock-of-mix-a-cup-coffee-latte-more-motive-top-view-foodgraphy-generative-ai-photo.jpg",
-        "render_child_together": true,
-        "coffee": [
-          {
-            "item_id": 1,
-            "item_name": "Espresso",
-            "item_description": "coffee",
-            "item_price_eat_in": 2.6,
-            "item_price_takeaway": 2.6,
-            "item_contents": "Espresso coffee",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 2,
-            "item_name": "Flat White",
-            "item_description": "coffee",
-            "item_price_eat_in": 3.2,
-            "item_price_takeaway": 3.2,
-            "item_contents": "Milk, coffee",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 3,
-            "item_name": "Latte",
-            "item_description": "coffee",
-            "item_price_eat_in": 3.2,
-            "item_price_takeaway": 3.2,
-            "item_contents": "Milk, coffee",
-            "item_topic": "hot_drinks",
-            "has_options": true,
-            "options": {
-              "syrups": ["vanilla", "hazelnut"],
-              "milks": ["oat", "almond", "coconut", "soya"]
+    "cafe_name": "Creams",
+    "menu": {
+        "drinks": {
+            "hot_drinks": {
+                "image_url": "https://static.vecteezy.com/system/resources/previews/025/282/026/non_2x/stock-of-mix-a-cup-coffee-latte-more-motive-top-view-foodgraphy-generative-ai-photo.jpg",
+                "render_child_together": true,
+                "coffee": [
+                    {
+                        "item_id": 1,
+                        "item_name": "Espresso",
+                        "item_description": "coffee",
+                        "item_price_eat_in": 2.6,
+                        "item_price_takeaway": 2.6,
+                        "item_contents": "Espresso coffee",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 2,
+                        "item_name": "Flat White",
+                        "item_description": "coffee",
+                        "item_price_eat_in": 3.2,
+                        "item_price_takeaway": 3.2,
+                        "item_contents": "Milk, coffee",
+                        "item_topic": "hot_drinks",
+                        "has_options": true,
+                        "option_limit": 1,
+                        "options": {
+                            "milk": [
+                                { "name": "Oat", "cost": 0.3 },
+                                { "name": "Almond", "cost": 0.5 },
+                                { "name": "soy", "cost": 0.5 },
+                                { "name": "coconut", "cost": 0.5 },
+                                { "name": "Whole", "cost": 0 }
+                            ]
+                        }
+                    },
+                    {
+                        "item_id": 3,
+                        "item_name": "Latte",
+                        "item_description": "coffee",
+                        "item_price_eat_in": 3.2,
+                        "item_price_takeaway": 3.2,
+                        "item_contents": "Milk, coffee",
+                        "item_topic": "hot_drinks",
+                        "has_options": true,
+                        "option_limit": 3,
+                        "options": {
+                            "milk": [
+                                { "name": "Oat", "cost": 0.3 },
+                                { "name": "Almond", "cost": 0.5 },
+                                { "name": "soy", "cost": 0.5 },
+                                { "name": "coconut", "cost": 0.5 },
+                                { "name": "Whole", "cost": 0 }
+                            ],
+                            "syrup": [
+                                { "name": "Vanilla", "cost": 0.2 },
+                                { "name": "Caramel", "cost": 0.3 }
+                            ]
+                        }
+                    },
+                    {
+                        "item_id": 4,
+                        "item_name": "Cappuccino",
+                        "item_description": "coffee",
+                        "item_price_eat_in": 3.2,
+                        "item_price_takeaway": 3.2,
+                        "item_contents": "Milk, coffee",
+                        "item_topic": "hot_drinks",
+                        "has_options": true,
+                        "option_limit": 3,
+                        "options": {
+                            "milk": [
+                                { "name": "Oat", "cost": 0.3 },
+                                { "name": "Almond", "cost": 0.5 },
+                                { "name": "Whole", "cost": 0 }
+                            ],
+                            "syrup": [
+                                { "name": "Vanilla", "cost": 0.2 },
+                                { "name": "Caramel", "cost": 0.3 }
+                            ]
+                        }
+                    },
+                    {
+                        "item_id": 5,
+                        "item_name": "Mocha",
+                        "item_description": "coffee",
+                        "item_price_eat_in": 3.5,
+                        "item_price_takeaway": 3.5,
+                        "item_contents": "Milk, coffee, chocolate",
+                        "item_topic": "hot_drinks"
+                    }
+                ],
+                "others": [
+                    {
+                        "item_id": 6,
+                        "item_name": "Chai Latte",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.3,
+                        "item_price_takeaway": 3.3,
+                        "item_contents": "Milk, chai spices",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 7,
+                        "item_name": "Matcha Latte",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.3,
+                        "item_price_takeaway": 3.3,
+                        "item_contents": "Milk, matcha",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 8,
+                        "item_name": "Turmeric Latte",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.3,
+                        "item_price_takeaway": 3.3,
+                        "item_contents": "Milk, turmeric",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 9,
+                        "item_name": "Beetroot Latte",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.3,
+                        "item_price_takeaway": 3.3,
+                        "item_contents": "Milk, beetroot",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 10,
+                        "item_name": "Chai Matcha",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.5,
+                        "item_price_takeaway": 3.5,
+                        "item_contents": "Milk, chai spices, matcha",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 11,
+                        "item_name": "Hot Chocolate",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.5,
+                        "item_price_takeaway": 3.5,
+                        "item_contents": "Milk, chocolate",
+                        "item_topic": "hot_drinks"
+                    },
+                    {
+                        "item_id": 12,
+                        "item_name": "Lotus Hot Choc",
+                        "item_description": "other_hot_drinks",
+                        "item_price_eat_in": 3.75,
+                        "item_price_takeaway": 3.75,
+                        "item_contents": "Milk, chocolate, lotus biscoff",
+                        "item_topic": "hot_drinks"
+                    }
+                ]
+            },
+            "render_child_together": false,
+
+            "cold_drinks": [],
+            "thick_shakes": [
+                {
+                    "item_id": 1,
+                    "item_name": "Oreo Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Oreo cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 2,
+                    "item_name": "Speculoos Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Biscoff cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 3,
+                    "item_name": "Chocolate Chip Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Oreo cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 4,
+                    "item_name": "Strawberry Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Biscoff cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                }
+            ],
+            "scoop_shakes": [
+                {
+                    "item_id": 1,
+                    "item_name": "Oreo Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Oreo cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 2,
+                    "item_name": "Speculoos Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Biscoff cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 3,
+                    "item_name": "Chocolate Chip Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Oreo cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 4,
+                    "item_name": "Strawberry Shake",
+                    "item_description": "cookie shake",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Biscoff cookies, milk, ice cream",
+                    "item_topic": "shake",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ]
+                    }
+                }
+            ]
+        },
+        "food": {
+            "gelato_and_sorbet": [
+                {
+                    "item_id": 3,
+                    "item_name": "1 Scoop",
+                    "item_description": "gelato or sorbet",
+                    "item_price_eat_in": 2.75,
+                    "item_price_takeaway": 2.75,
+                    "item_contents": "Choice of gelato or sorbet flavor",
+                    "item_topic": "gelato_and_sorbet",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ],
+                        "gelato": [
+                            { "name": "Banoffee", "cost": 0.0 },
+                            { "name": "Creams Rocher", "cost": 0.0 },
+                            { "name": "Creams Bueno", "cost": 0.0 },
+                            { "name": "Bubble Gum", "cost": 0.0 },
+                            { "name": "Flin", "cost": 0.0 },
+                            { "name": "Chocolate Chip", "cost": 0.0 },
+                            { "name": "Chocolate Fudge Brownie", "cost": 0.0 },
+                            { "name": "Coconut", "cost": 0.0 },
+                            { "name": "Coffee Arabica", "cost": 0.0 },
+                            { "name": "Cookie Dough", "cost": 0.0 },
+                            { "name": "Mint Chocolate Chip", "cost": 0.0 },
+                            { "name": "Pistachio", "cost": 0.0 },
+                            { "name": "O-RE-O", "cost": 0.0 },
+                            { "name": "Salted Caramel", "cost": 0.0 },
+                            { "name": "Speculoos", "cost": 0.0 },
+                            { "name": "Strawberry", "cost": 0.0 },
+                            { "name": "Vanilla", "cost": 0.0 },
+                            { "name": "White Chocolate", "cost": 0.0 }
+                        ],
+                        "sorbet": [
+                            { "name": "Forest Fruits", "cost": 0.0 },
+                            { "name": "Blood Orange", "cost": 0.0 },
+                            { "name": "Alphonso Mango", "cost": 0.0 },
+                            { "name": "Amalfi Lemon", "cost": 0.0 },
+                            { "name": "Raspberry", "cost": 0.0 },
+                            { "name": "Chocolate Absolute", "cost": 0.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 4,
+                    "item_name": "2 Scoops",
+                    "item_description": "gelato or sorbet",
+                    "item_price_eat_in": 4.2,
+                    "item_price_takeaway": 4.2,
+                    "item_contents": "Choice of gelato or sorbet flavors",
+                    "item_topic": "gelato_and_sorbet",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ],
+                        "gelato": [
+                            { "name": "Banoffee", "cost": 0.0 },
+                            { "name": "Creams Rocher", "cost": 0.0 },
+                            { "name": "Creams Bueno", "cost": 0.0 },
+                            { "name": "Bubble Gum", "cost": 0.0 },
+                            { "name": "Flin", "cost": 0.0 },
+                            { "name": "Chocolate Chip", "cost": 0.0 },
+                            { "name": "Chocolate Fudge Brownie", "cost": 0.0 },
+                            { "name": "Coconut", "cost": 0.0 },
+                            { "name": "Coffee Arabica", "cost": 0.0 },
+                            { "name": "Cookie Dough", "cost": 0.0 },
+                            { "name": "Mint Chocolate Chip", "cost": 0.0 },
+                            { "name": "Pistachio", "cost": 0.0 },
+                            { "name": "O-RE-O", "cost": 0.0 },
+                            { "name": "Salted Caramel", "cost": 0.0 },
+                            { "name": "Speculoos", "cost": 0.0 },
+                            { "name": "Strawberry", "cost": 0.0 },
+                            { "name": "Vanilla", "cost": 0.0 },
+                            { "name": "White Chocolate", "cost": 0.0 }
+                        ],
+                        "sorbet": [
+                            { "name": "Forest Fruits", "cost": 0.0 },
+                            { "name": "Blood Orange", "cost": 0.0 },
+                            { "name": "Alphonso Mango", "cost": 0.0 },
+                            { "name": "Amalfi Lemon", "cost": 0.0 },
+                            { "name": "Raspberry", "cost": 0.0 },
+                            { "name": "Chocolate Absolute", "cost": 0.0 }
+                        ]
+                    }
+                },
+                {
+                    "item_id": 5,
+                    "item_name": "3 Scoops",
+                    "item_description": "gelato or sorbet",
+                    "item_price_eat_in": 5.5,
+                    "item_price_takeaway": 5.5,
+                    "item_contents": "Choice of gelato or sorbet flavors",
+                    "item_topic": "gelato_and_sorbet",
+                    "has_options": true,
+                    "option_limit": 3,
+                    "options": {
+                        "whipped-cream": [
+                            { "name": "Whipped-Cream", "cost": 1.0 }
+                        ],
+                        "gelato": [
+                            { "name": "Banoffee", "cost": 0.0 },
+                            { "name": "Creams Rocher", "cost": 0.0 },
+                            { "name": "Creams Bueno", "cost": 0.0 },
+                            { "name": "Bubble Gum", "cost": 0.0 },
+                            { "name": "Flin", "cost": 0.0 },
+                            { "name": "Chocolate Chip", "cost": 0.0 },
+                            { "name": "Chocolate Fudge Brownie", "cost": 0.0 },
+                            { "name": "Coconut", "cost": 0.0 },
+                            { "name": "Coffee Arabica", "cost": 0.0 },
+                            { "name": "Cookie Dough", "cost": 0.0 },
+                            { "name": "Mint Chocolate Chip", "cost": 0.0 },
+                            { "name": "Pistachio", "cost": 0.0 },
+                            { "name": "O-RE-O", "cost": 0.0 },
+                            { "name": "Salted Caramel", "cost": 0.0 },
+                            { "name": "Speculoos", "cost": 0.0 },
+                            { "name": "Strawberry", "cost": 0.0 },
+                            { "name": "Vanilla", "cost": 0.0 },
+                            { "name": "White Chocolate", "cost": 0.0 }
+                        ],
+                        "sorbet": [
+                            { "name": "Forest Fruits", "cost": 0.0 },
+                            { "name": "Blood Orange", "cost": 0.0 },
+                            { "name": "Alphonso Mango", "cost": 0.0 },
+                            { "name": "Amalfi Lemon", "cost": 0.0 },
+                            { "name": "Raspberry", "cost": 0.0 },
+                            { "name": "Chocolate Absolute", "cost": 0.0 }
+                        ]
+                    }
+                }
+            ],
+            "waffles_and_crepes": {
+                "image_url": "https://example.com/creams_waffles_crepes.jpg",
+                "render_child_together": false,
+                "signature_range": [
+                    {
+                        "item_id": 6,
+                        "item_name": "Strawberry Chocolate Indulgence",
+                        "item_description": "Signature waffle or crepe",
+                        "item_price_eat_in": 9.95,
+                        "item_price_takeaway": 9.95,
+                        "item_contents": "Sliced strawberries, milk chocolate sauce, white chocolate sauce, milk chocolate shavings",
+                        "item_topic": "waffles_and_crepes"
+                    },
+                    {
+                        "item_id": 7,
+                        "item_name": "Royale",
+                        "item_description": "Signature waffle or crepe",
+                        "item_price_eat_in": 9.95,
+                        "item_price_takeaway": 9.95,
+                        "item_contents": "Creams biscuit gelato, milk chocolate sauce, chopped nuts, Ferrero Rocher",
+                        "item_topic": "waffles_and_crepes"
+                    }
+                ],
+                "other_items": [
+                    {
+                        "item_id": 8,
+                        "item_name": "Banana & Strawberry",
+                        "item_description": "Classic waffle or crepe",
+                        "item_price_eat_in": 8.95,
+                        "item_price_takeaway": 8.95,
+                        "item_contents": "Banana, strawberry, soft vanilla ice cream",
+                        "item_topic": "waffles_and_crepes"
+                    }
+                ]
+            },
+            "cookie_dough": {
+                "image_url": "https://example.com/creams_cookie_dough.jpg",
+                "render_child_together": true,
+                "items": [
+                    {
+                        "item_id": 9,
+                        "item_name": "Milk Chocolate Cookie Dough",
+                        "item_description": "Warm gooey cookie dough",
+                        "item_price_eat_in": 5.95,
+                        "item_price_takeaway": 5.95,
+                        "item_contents": "Milk chocolate cookie dough, milk chocolate sauce, milk chocolate shavings",
+                        "item_topic": "cookie_dough"
+                    },
+                    {
+                        "item_id": 10,
+                        "item_name": "Creams x Kalla",
+                        "item_description": "Warm gooey cookie dough",
+                        "item_price_eat_in": 7.45,
+                        "item_price_takeaway": 7.45,
+                        "item_contents": "Milk chocolate cookie dough, Creams x Kalla sauce, milk chocolate shavings, chocolate chip gelato, Creams wafer",
+                        "item_topic": "cookie_dough"
+                    }
+                ]
+            },
+            "sundaes": {
+                "image_url": "https://example.com/creams_sundaes.jpg",
+                "render_child_together": true,
+                "items": [
+                    {
+                        "item_id": 11,
+                        "item_name": "Creams Royale",
+                        "item_description": "Sinful sundae",
+                        "item_price_eat_in": 8.95,
+                        "item_price_takeaway": 8.95,
+                        "item_contents": "Creams Rocher gelato, Creams bueno gelato, Ferrero Rocher pieces, soft vanilla ice cream, milk chocolate sauce, Ferrero Rocher, milk chocolate shavings, Creams wafer",
+                        "item_topic": "sundaes"
+                    },
+                    {
+                        "item_id": 12,
+                        "item_name": "Speculoos and Caramel",
+                        "item_description": "Sinful sundae",
+                        "item_price_eat_in": 8.95,
+                        "item_price_takeaway": 8.95,
+                        "item_contents": "Speculoos gelato, salted caramel gelato, soft vanilla ice cream, Lotus Biscoff crumb, Lotus Biscoff sauce, Creams wafer",
+                        "item_topic": "sundaes"
+                    }
+                ]
+            },
+            "doughnuts": {
+                "image_url": "https://example.com/creams_doughnuts.jpg",
+                "render_child_together": false,
+                "single": [
+                    {
+                        "item_id": 13,
+                        "item_name": "Single Doughnut",
+                        "item_description": "Choose your favorite",
+                        "item_price_eat_in": 3.95,
+                        "item_price_takeaway": 3.95,
+                        "item_contents": "Choice of doughnut flavor",
+                        "item_topic": "doughnuts"
+                    }
+                ],
+                "boxes": [
+                    {
+                        "item_id": 14,
+                        "item_name": "Creams Indulgence Box",
+                        "item_description": "Doughnut box",
+                        "item_price_eat_in": 12.95,
+                        "item_price_takeaway": 12.95,
+                        "item_contents": "Four doughnuts: Chocolate Chip & Peanut Butter, Bubble Gum Meringue, Lotus Biscoff, Lotus Biscoff & Kinder",
+                        "item_topic": "doughnuts"
+                    }
+                ]
+            },
+            "cakes": {
+                "image_url": "https://example.com/creams_cakes.jpg",
+                "render_child_together": true,
+                "items": [
+                    {
+                        "item_id": 15,
+                        "item_name": "Cake Selection",
+                        "item_description": "Daily selection of cakes and pastries",
+                        "item_price_eat_in": 5.95,
+                        "item_price_takeaway": 5.95,
+                        "item_contents": "Ask our team for available options",
+                        "item_topic": "cakes"
+                    }
+                ]
+            },
+            "savoury": {
+                "image_url": "https://example.com/creams_savoury.jpg",
+                "render_child_together": true,
+                "items": [
+                    {
+                        "item_id": 16,
+                        "item_name": "Cheese Nachos (Small)",
+                        "item_description": "Savory snack",
+                        "item_price_eat_in": 5.95,
+                        "item_price_takeaway": 5.95,
+                        "item_contents": "Nachos with melted cheese sauce",
+                        "item_topic": "savoury"
+                    },
+                    {
+                        "item_id": 17,
+                        "item_name": "Cheese Nachos (Large)",
+                        "item_description": "Savory snack",
+                        "item_price_eat_in": 6.95,
+                        "item_price_takeaway": 6.95,
+                        "item_contents": "Nachos with melted cheese sauce",
+                        "item_topic": "savoury"
+                    },
+                    {
+                        "item_id": 18,
+                        "item_name": "Popcorn Chicken Waffle Bites",
+                        "item_description": "Savory snack",
+                        "item_price_eat_in": 8.95,
+                        "item_price_takeaway": 8.95,
+                        "item_contents": "Fried chicken pieces in Creams waffle batter, with BBQ sauce or maple syrup",
+                        "item_topic": "savoury"
+                    }
+                ]
+            },
+            "extras": {
+                "render_child_together": true,
+                "items": [
+                    {
+                        "item_id": 19,
+                        "item_name": "Cheese",
+                        "item_description": "extra",
+                        "item_price_eat_in": 1.0,
+                        "item_price_takeaway": 1.0,
+                        "item_contents": "Extra cheese",
+                        "item_topic": "extras"
+                    },
+                    {
+                        "item_id": 20,
+                        "item_name": "Jalapenos",
+                        "item_description": "extra",
+                        "item_price_eat_in": 1.0,
+                        "item_price_takeaway": 1.0,
+                        "item_contents": "Extra jalapenos",
+                        "item_topic": "extras"
+                    },
+                    {
+                        "item_id": 21,
+                        "item_name": "Guacamole",
+                        "item_description": "extra",
+                        "item_price_eat_in": 1.0,
+                        "item_price_takeaway": 1.0,
+                        "item_contents": "Extra guacamole",
+                        "item_topic": "extras"
+                    },
+                    {
+                        "item_id": 22,
+                        "item_name": "Salsa",
+                        "item_description": "extra",
+                        "item_price_eat_in": 1.0,
+                        "item_price_takeaway": 1.0,
+                        "item_contents": "Extra salsa",
+                        "item_topic": "extras"
+                    }
+                ]
             }
-          },
-          {
-            "item_id": 4,
-            "item_name": "Cappuccino",
-            "item_description": "coffee",
-            "item_price_eat_in": 3.2,
-            "item_price_takeaway": 3.2,
-            "item_contents": "Milk, coffee",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 5,
-            "item_name": "Mocha",
-            "item_description": "coffee",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Milk, coffee, chocolate",
-            "item_topic": "hot_drinks"
-          }
-        ],
-        "others": [
-          {
-            "item_id": 6,
-            "item_name": "Chai Latte",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.3,
-            "item_price_takeaway": 3.3,
-            "item_contents": "Milk, chai spices",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 7,
-            "item_name": "Matcha Latte",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.3,
-            "item_price_takeaway": 3.3,
-            "item_contents": "Milk, matcha",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 8,
-            "item_name": "Turmeric Latte",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.3,
-            "item_price_takeaway": 3.3,
-            "item_contents": "Milk, turmeric",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 9,
-            "item_name": "Beetroot Latte",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.3,
-            "item_price_takeaway": 3.3,
-            "item_contents": "Milk, beetroot",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 10,
-            "item_name": "Chai Matcha",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Milk, chai spices, matcha",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 11,
-            "item_name": "Hot Chocolate",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Milk, chocolate",
-            "item_topic": "hot_drinks"
-          },
-          {
-            "item_id": 12,
-            "item_name": "Lotus Hot Choc",
-            "item_description": "other_hot_drinks",
-            "item_price_eat_in": 3.75,
-            "item_price_takeaway": 3.75,
-            "item_contents": "Milk, chocolate, lotus biscoff",
-            "item_topic": "hot_drinks"
-          }
-        ]
-      },
-      "cold_drinks": {
-        "image_url": "https://images.ctfassets.net/l5fkpck1mwg3/6FUOi4hypIHEMW82MT5ewJ/ca94d8d554e425cbfc37270b0a2afde5/COKE_Bottled_DrinkAssortment_4000x3000.png",
-        "render_child_together": false,
-        "shakes": [
-          {
-            "item_id": 88,
-            "item_name": "Oreo Shake",
-            "item_description": "cookie shake",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Green vegetables, fruits",
-            "item_topic": "shake"
-          },
-          {
-            "item_id": 89,
-            "item_name": "Biscoff Shake",
-            "item_description": "cookie shake",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Green vegetables, fruits",
-            "item_topic": "shake"
-          }
-        ],
-        "smoothies": [
-          {
-            "item_id": 13,
-            "item_name": "Clean Green",
-            "item_description": "smoothie",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Green vegetables, fruits",
-            "item_topic": "smoothies"
-          },
-          {
-            "item_id": 14,
-            "item_name": "Coco Loco",
-            "item_description": "smoothie",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Coconut, fruits",
-            "item_topic": "smoothies"
-          },
-          {
-            "item_id": 15,
-            "item_name": "Mango Passion",
-            "item_description": "smoothie",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Mango, passion fruit",
-            "item_topic": "smoothies"
-          },
-          {
-            "item_id": 16,
-            "item_name": "Peanut Butter, Banana & Honey",
-            "item_description": "smoothie",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Peanut butter, banana, honey",
-            "item_topic": "smoothies"
-          },
-          {
-            "item_id": 17,
-            "item_name": "Strawberry & Banana",
-            "item_description": "smoothie",
-            "item_price_eat_in": 5.5,
-            "item_price_takeaway": 5.5,
-            "item_contents": "Strawberry, banana",
-            "item_topic": "smoothies"
-          },
-          {
-            "item_id": 18,
-            "item_name": "Scoop Of Either Choc & Nut Or Choc",
-            "item_description": "smoothie",
-            "item_price_eat_in": 6.5,
-            "item_price_takeaway": 6.5,
-            "item_contents": "Chocolate, nuts",
-            "item_topic": "smoothies"
-          }
-        ]
-      }
-    },
-    "food": {
-      "edibles": [
-        {
-          "item_id": 19,
-          "item_name": "The Veggie Dropshot",
-          "item_description": "food",
-          "item_price_eat_in": 11.95,
-          "item_price_takeaway": 11.95,
-          "item_contents": "Vegetarian ingredients",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 20,
-          "item_name": "The Serve",
-          "item_description": "food",
-          "item_price_eat_in": 6.5,
-          "item_price_takeaway": 6.5,
-          "item_contents": "Ingredients for 'The Serve'",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 21,
-          "item_name": "The Smash",
-          "item_description": "food",
-          "item_price_eat_in": 5.0,
-          "item_price_takeaway": 5.0,
-          "item_contents": "Ingredients for 'The Smash'",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 22,
-          "item_name": "The Advantage",
-          "item_description": "food",
-          "item_price_eat_in": 6.2,
-          "item_price_takeaway": 6.2,
-          "item_contents": "Ingredients for 'The Advantage'",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 23,
-          "item_name": "The Forehand",
-          "item_description": "food",
-          "item_price_eat_in": 7.2,
-          "item_price_takeaway": 7.2,
-          "item_contents": "Ingredients for 'The Forehand'",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 24,
-          "item_name": "The Refuel",
-          "item_description": "food",
-          "item_price_eat_in": 6.95,
-          "item_price_takeaway": 6.95,
-          "item_contents": "Ingredients for 'The Refuel'",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 25,
-          "item_name": "The Slice",
-          "item_description": "food",
-          "item_price_eat_in": 3.0,
-          "item_price_takeaway": 3.0,
-          "item_contents": "Ingredients for 'The Slice'",
-          "item_topic": "food"
-        },
-        {
-          "item_id": 26,
-          "item_name": "The Break Point",
-          "item_description": "special",
-          "item_price_eat_in": 9.95,
-          "item_price_takeaway": 9.95,
-          "item_contents": "Ingredients for 'The Break Point'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 27,
-          "item_name": "The Game, Set & Match",
-          "item_description": "special",
-          "item_price_eat_in": 11.5,
-          "item_price_takeaway": 11.5,
-          "item_contents": "Ingredients for 'The Game, Set & Match'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 28,
-          "item_name": "The Volley",
-          "item_description": "special",
-          "item_price_eat_in": 7.5,
-          "item_price_takeaway": 7.5,
-          "item_contents": "Ingredients for 'The Volley'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 29,
-          "item_name": "The Rafa Na-Dill",
-          "item_description": "special",
-          "item_price_eat_in": 12.5,
-          "item_price_takeaway": 12.5,
-          "item_contents": "Ingredients for 'The Rafa Na-Dill'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 30,
-          "item_name": "The Grass Court",
-          "item_description": "special",
-          "item_price_eat_in": 10.95,
-          "item_price_takeaway": 10.95,
-          "item_contents": "Ingredients for 'The Grass Court'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 31,
-          "item_name": "The Mini Break",
-          "item_description": "special",
-          "item_price_eat_in": 6.5,
-          "item_price_takeaway": 6.5,
-          "item_contents": "Ingredients for 'The Mini Break'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 32,
-          "item_name": "The Match Point",
-          "item_description": "special",
-          "item_price_eat_in": 11.5,
-          "item_price_takeaway": 11.5,
-          "item_contents": "Ingredients for 'The Match Point'",
-          "item_topic": "specials"
-        },
-        {
-          "item_id": 33,
-          "item_name": "The Topspin",
-          "item_description": "special",
-          "item_price_eat_in": 9.5,
-          "item_price_takeaway": 9.5,
-          "item_contents": "Ingredients for 'The Topspin'",
-          "item_topic": "specials"
         }
-      ],
-      "extras": {
-        "render_child_together": true,
-        "cheese": [
-          {
-            "item_id": 35,
-            "item_name": "Feta",
-            "item_description": "extra",
-            "item_price_eat_in": 2.0,
-            "item_price_takeaway": 2.0,
-            "item_contents": "Feta cheese",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 99,
-            "item_name": "American cheese",
-            "item_description": "extra",
-            "item_price_eat_in": 2.0,
-            "item_price_takeaway": 2.0,
-            "item_contents": " cheese",
-            "item_topic": "extras"
-          }
-        ],
-
-        "others": [
-          {
-            "item_id": 34,
-            "item_name": "Sourdough Toast",
-            "item_description": "extra",
-            "item_price_eat_in": 2.0,
-            "item_price_takeaway": 2.0,
-            "item_contents": "Sourdough toast",
-            "item_topic": "extras"
-          },
-
-          {
-            "item_id": 36,
-            "item_name": "Homemade Beans",
-            "item_description": "extra",
-            "item_price_eat_in": 3.0,
-            "item_price_takeaway": 3.0,
-            "item_contents": "Homemade beans",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 37,
-            "item_name": "Hash Browns",
-            "item_description": "extra",
-            "item_price_eat_in": 3.0,
-            "item_price_takeaway": 3.0,
-            "item_contents": "Hash browns",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 38,
-            "item_name": "Full English Breakfast",
-            "item_description": "extra",
-            "item_price_eat_in": 7.0,
-            "item_price_takeaway": 7.0,
-            "item_contents": "English breakfast ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 39,
-            "item_name": "French Toast",
-            "item_description": "extra",
-            "item_price_eat_in": 4.5,
-            "item_price_takeaway": 4.5,
-            "item_contents": "French toast ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 38,
-            "item_name": "Full English Breakfast",
-            "item_description": "extra",
-            "item_price_eat_in": 7.0,
-            "item_price_takeaway": 7.0,
-            "item_contents": "English breakfast ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 39,
-            "item_name": "French Toast",
-            "item_description": "extra",
-            "item_price_eat_in": 4.5,
-            "item_price_takeaway": 4.5,
-            "item_contents": "French toast ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 38,
-            "item_name": "Full English Breakfast",
-            "item_description": "extra",
-            "item_price_eat_in": 7.0,
-            "item_price_takeaway": 7.0,
-            "item_contents": "English breakfast ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 39,
-            "item_name": "French Toast",
-            "item_description": "extra",
-            "item_price_eat_in": 4.5,
-            "item_price_takeaway": 4.5,
-            "item_contents": "French toast ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          },
-          {
-            "item_id": 40,
-            "item_name": "Cakes",
-            "item_description": "extra",
-            "item_price_eat_in": 3.5,
-            "item_price_takeaway": 3.5,
-            "item_contents": "Cake ingredients",
-            "item_topic": "extras"
-          }
-        ]
-      }
     }
-  }
 }
