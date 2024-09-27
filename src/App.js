@@ -1,25 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import "./App.css";
-import Unauth from "./page/Unauth";
-import Menu from "./page/Menu";
-import Dashboard from "./page/Dashboard";
-import Checkout from "./page/Checkout";
+import './App.css';
+import Unauth from './page/Unauth';
+import Menu from './page/Menu';
+import Dashboard from './page/Dashboard';
+import Checkout from './page/Checkout';
+import TableOrder from './page/TableOrder';
 
 function App() {
-  return (
-    <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Unauth />} />
-          <Route path="/menu/*" element={<Menu />} />
-          <Route path="/dashboard/" element={<Dashboard />} />
-          <Route path="/checkout" element={<Checkout />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div className="app">
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Unauth />} />
+                    <Route path="/menu/*" element={<Menu />} />
+                    <Route path="/dashboard/" element={<Dashboard />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/checkTableOrder" element={<TableOrder />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 export default App;
