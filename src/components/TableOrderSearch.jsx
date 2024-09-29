@@ -78,6 +78,9 @@ const TableOrderSearch = () => {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Payment Method
                                 </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Order Status
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -102,6 +105,9 @@ const TableOrderSearch = () => {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         {order.payment_method}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {order.order_status}
                                     </td>
                                 </tr>
                             ))}
