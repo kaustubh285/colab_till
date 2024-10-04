@@ -47,7 +47,10 @@ const Popover = ({ showExtraActions, setShowExtraActions }) => {
             <div className="px-2 py-3 border-b border-dotted cursor-pointer hover:font-semibold min-w-56 italic">
                 <button onClick={() => navigate('/refund')}>Refund</button>
             </div>
-            <div className="px-2 py-3 border-b border-dotted cursor-pointer hover:font-semibold min-w-56 italic">
+            <div
+                className="px-2 py-3 border-b border-dotted cursor-pointer hover:font-semibold min-w-56 italic"
+                onClick={() => navigate('/admin')}
+            >
                 Admin
             </div>
             <div className="px-2 py-3 border-b border-dotted cursor-pointer hover:font-semibold min-w-56 italic">
