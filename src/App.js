@@ -8,6 +8,7 @@ import Menu from './page/Menu';
 import Dashboard from './page/Dashboard';
 import Checkout from './page/Checkout';
 import TableOrder from './page/TableOrder';
+import Refund from './page/Refund';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/dashboard/" element={<Dashboard />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/checkTableOrder" element={<TableOrder />} />
+                    <Route path="/refund" element={<Refund />} />
                 </Routes>
             </BrowserRouter>
         </div>
