@@ -25,7 +25,7 @@ function Checkout() {
     const [discount, setDiscount] = useState(0);
     const [total, setTotal] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState('card');
-    const orderId = location.state?.orderId;
+    // const orderId = location.state?.orderId;
 
     const updateOrderList = (newSubtotal, newDiscount, newTotal, payMethod) => {
         setSubtotal(newSubtotal);
@@ -133,7 +133,6 @@ function Checkout() {
                                 )
                                     navigate(-1, {
                                         state: {
-                                            orderId: orderId,
                                             tableNum: tableNum,
                                         },
                                     });
@@ -186,7 +185,7 @@ function Checkout() {
                         className=" px-8 py-3 text-white rounded-md bg-teal-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
                         onClick={() => {
                             navigate(`/menu`, {
-                                state: { orderId: orderId, tableNum: tableNum },
+                                state: { tableNum: tableNum },
                             });
                         }}
                     >
@@ -195,16 +194,22 @@ function Checkout() {
 
                     <div
                         className=" px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
-                        onClick={() =>
-                            finishOrder(
+                        onClick={() => {
+                            const result = finishOrder(
                                 groupedOrder,
                                 orderAllergy,
                                 tableNum,
                                 paymentMethod,
                                 total,
-                                orderId,
-                            )
-                        }
+                            );
+                            if (result == 'empty') {
+                                window.alert('order cannot be empty');
+                                navigate('/menu');
+                            } else {
+                                localStorage.removeItem('grouped_order');
+                                navigate('/menu');
+                            }
+                        }}
                     >
                         Order Now
                     </div>

@@ -90,7 +90,7 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
         let confirmMsg =
             submissionType === 'later'
                 ? `Would you like to place a 'pay-later' order for ${tableStr} with outstanding amount : ${total}$`
-                : `Confirm payment of ${total} for ${tableStr}`;
+                : `Confirm payment of ${total.toFixed(2)} for ${tableStr}`;
         if (window.confirm(confirmMsg)) {
             switch (submissionType) {
                 case 'later':

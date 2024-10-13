@@ -18,7 +18,7 @@ const RefundComponent = () => {
         setError(null);
         try {
             const response = await axios.get(
-                `http://localhost:8000/order/check-table-order/?filter=${encodeURIComponent(inputValue)}`,
+                `http://localhost:8000/order/check-order-refund/?filter=${encodeURIComponent(inputValue)}`,
             );
             setOrders(
                 Array.isArray(response.data) ? response.data : [response.data],
@@ -125,7 +125,7 @@ const RefundComponent = () => {
     };
 
     return (
-        <div className="container mx-auto p-6 flex flex-col items-center">
+        <div className="container-fluid mx-auto p-6 flex flex-col items-center">
             <h1 className="text-white">Refund Section</h1>
             <div class="w-full max-w-lg mb-8 flex">
                 <input
@@ -151,34 +151,34 @@ const RefundComponent = () => {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-200">
                                     Order ID
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Table No
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Time
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Items
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Total
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Payment Method
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Order Status
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Refund amount
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Refund Reason
                                 </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Action
                                 </th>
                             </tr>
@@ -209,7 +209,7 @@ const RefundComponent = () => {
                                     <td className="px-4 py-4 whitespace-nowrap">
                                         {order.order_status}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-6 whitespace-nowrap">
                                         <input
                                             type="number"
                                             value={
@@ -231,9 +231,10 @@ const RefundComponent = () => {
                                                     ? 'border-red-500'
                                                     : 'border-gray-300'
                                             }`}
-                                            placeholder="Amount"
+                                            placeholder="0"
                                             max={order.total}
                                             step="0.01"
+                                            min=""
                                         />
                                         {parseFloat(
                                             refundAmounts[order.order_id],

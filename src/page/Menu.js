@@ -192,19 +192,19 @@ const Menu = () => {
                         className=" px-8 py-3 text-white rounded-md bg-blue-400 h-max shadow-md active:shadow-none cursor-pointer text-3xl"
                         onClick={() => {
                             // finishOrder(groupedOrder, orderAllergy, tableNum);${}
-                            const orderId =
-                                '#' +
-                                Math.floor(
-                                    1000 + Math.random() * 9000,
-                                ).toString();
-                            console.log(
-                                'orderId created ',
-                                orderId,
-                                ' ',
-                                typeof orderId,
-                            );
+                            // const orderId =
+                            //     '#' +
+                            //     Math.floor(
+                            //         1000 + Math.random() * 9000,
+                            //     ).toString();
+                            // console.log(
+                            //     'orderId created ',
+                            //     orderId,
+                            //     ' ',
+                            //     typeof orderId,
+                            // );
                             navigate('/checkout', {
-                                state: { orderId: orderId, tableNum: tableNum },
+                                state: { tableNum: tableNum },
                             });
                         }}
                     >
