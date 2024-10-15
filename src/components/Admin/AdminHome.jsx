@@ -7,8 +7,8 @@ const AdminHome = () => {
             href: '/attendance',
         },
         {
-            title: 'some option 1',
-            href: '#',
+            title: 'End of day',
+            href: '/eod',
         },
         {
             title: 'some option 2',

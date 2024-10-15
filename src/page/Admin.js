@@ -3,6 +3,7 @@ import AdminNav from '../components/Admin/AdminNav';
 import CheckEmpClock from '../components/Admin/CheckEmpClock';
 import { Routes, Route } from 'react-router-dom';
 import AdminHome from '../components/Admin/AdminHome';
+import EOD from '../components/Admin/EOD';
 
 const Admin = () => {
     return (
@@ -13,6 +14,8 @@ const Admin = () => {
                 <Route path="/" element={<AdminHome />} />
 
                 <Route path="/attendance" element={<CheckEmpClock />} />
+
+                <Route path="/eod" element={<EOD />} />
             </Routes>
         </div>
     );

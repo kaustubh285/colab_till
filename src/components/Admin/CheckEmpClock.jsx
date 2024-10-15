@@ -97,60 +97,68 @@ const CheckEmpClock = () => {
                     </form>
                 </div>
 
-                <div class="relative overflow-x-auto shadow-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                        <thead class="text-xs text-gray-50 uppercase bg-gray-700 ">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Date
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Employee
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Till-code
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Clock - in
-                                </th>
-
-                                <th scope="col" class="px-6 py-3">
-                                    Clock - out
-                                </th>
-
-                                <th scope="col" class="px-6 py-3">
-                                    Hours worked
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {employeeTable.map((entries) => (
-                                <tr class="bg-white border-b  hover:bg-gray-50 cursor-pointer">
-                                    <td class="px-6 py-4">{entries.date}</td>
-
-                                    <th
-                                        scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                                    >
-                                        {entries.emp_name}
+                {employeeTable.length === 0 ? (
+                    <div className=" w-full px-4 py-5 text-red-800 bg-red-200 text-center">
+                        No data
+                    </div>
+                ) : (
+                    <div class="relative overflow-x-auto shadow-lg">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                            <thead class="text-xs text-gray-50 uppercase bg-gray-700 ">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Date
                                     </th>
-                                    <td class="px-6 py-4">
-                                        {entries.till_code}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {entries.clock_in}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {entries.clock_out}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {entries.hours_worked}
-                                    </td>
+                                    <th scope="col" class="px-6 py-3">
+                                        Employee
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Till-code
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Clock - in
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3">
+                                        Clock - out
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3">
+                                        Hours worked
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {employeeTable.map((entries) => (
+                                    <tr class="bg-white border-b  hover:bg-gray-50 cursor-pointer">
+                                        <td class="px-6 py-4">
+                                            {entries.date}
+                                        </td>
+
+                                        <th
+                                            scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                                        >
+                                            {entries.emp_name}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {entries.till_code}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {entries.clock_in}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {entries.clock_out}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {entries.hours_worked}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </>
     );

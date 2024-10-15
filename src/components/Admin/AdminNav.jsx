@@ -27,6 +27,12 @@ const AdminNav = () => {
                     >
                         Attendance
                     </div>
+                    <div
+                        class="text-xl cursor-pointer py-3 px-3 hover:font-semibold w-24"
+                        onClick={() => navigate('/admin/eod')}
+                    >
+                        Reports
+                    </div>
                 </div>
                 <div className="w-full  flex items-center justify-end my-2 px-0 space-x-4">
                     <div class="text-xl cursor-pointer py-3 px-3 hover:font-semibold w-24 text-right">
