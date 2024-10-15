@@ -8,6 +8,9 @@ import Menu from './page/Menu';
 import Dashboard from './page/Dashboard';
 import Checkout from './page/Checkout';
 import TableOrder from './page/TableOrder';
+
+import Admin from './page/Admin';
+
 import Refund from './page/Refund';
 
 function App() {
@@ -16,6 +19,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Unauth />} />
+                    <Route path="/admin/*" element={<Admin />} />
                     <Route path="/menu/*" element={<Menu />} />
                     <Route path="/dashboard/" element={<Dashboard />} />
                     <Route path="/checkout" element={<Checkout />} />
