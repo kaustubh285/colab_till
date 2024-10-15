@@ -159,18 +159,21 @@ const EOD = () => {
             <hr className="pb-9"></hr>
 
             <div className="flex flex-wrap w-100">
-                {dayOrders.map((order) => (
-                    <div
-                        className="px-9 py-8 text-center w-80 mx-2 border rounded-md cursor-pointer shadow-lg flex flex-col space-y-3 my-2"
-                        onClick={() => setShowOrdersModal(order)}
-                    >
-                        <p className="text-xl font-semibold">
-                            Order No: {order.order_id}
-                        </p>
-                        <p className="text-xl">Table No: {order.table_no}</p>
-                        <p className="text-xl">Amount {order.total}£</p>
-                    </div>
-                ))}
+                {dayOrders &&
+                    dayOrders.map((order) => (
+                        <div
+                            className="px-9 py-8 text-center w-80 mx-2 border rounded-md cursor-pointer shadow-lg flex flex-col space-y-3 my-2"
+                            onClick={() => setShowOrdersModal(order)}
+                        >
+                            <p className="text-xl font-semibold">
+                                Order No: {order.order_id}
+                            </p>
+                            <p className="text-xl">
+                                Table No: {order.table_no}
+                            </p>
+                            <p className="text-xl">Amount {order.total}£</p>
+                        </div>
+                    ))}
             </div>
         </div>
     );

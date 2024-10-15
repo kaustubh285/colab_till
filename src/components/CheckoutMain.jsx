@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Keypad from './Keypad';
+import { finishOrder } from '../helper/menuHelper';
+import { useNavigate } from 'react-router-dom';
 
-function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
+function CheckoutMain({
+    tableNum,
+    cartItems,
+    updateOrderList,
+    fromRefund,
+    orderId,
+    payment_method,
+}) {
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [cardType, setCardType] = useState('');
     const [discountType, setDiscountType] = useState('0');
@@ -12,6 +21,10 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
     const [cashInput, setCashInput] = useState('');
     const [changeOrDue, setChangeOrDue] = useState({ amount: 0, type: 'none' });
     const [activeInput, setActiveInput] = useState(null); // 'cash' or 'discount'
+
+    const [groupedOrder, setGroupedOrder] = useState([]);
+    const [orderAllergy, setOrderAllergy] = useState([]);
+    const navigate = useNavigate();
 
     const boxClass =
         'w-full py-8 flex items-center justify-center bg-slate-200 rounded-lg text-black';
@@ -26,6 +39,9 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
 
     useEffect(() => {
         calculateTotals();
+        setGroupedOrder(
+            JSON.parse(localStorage.getItem('grouped_order')) || [],
+        );
     }, [cartItems, discountType, customDiscount, paymentMethod]);
 
     useEffect(() => {
@@ -94,13 +110,48 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
         if (window.confirm(confirmMsg)) {
             switch (submissionType) {
                 case 'later':
+                    const result = finishOrder(
+                        groupedOrder,
+                        orderAllergy,
+                        tableNum,
+                        'pay-later',
+                        false,
+                        'NA',
+                        total,
+                        false,
+                    );
+                    if (result == 'empty') {
+                        window.alert('order cannot be empty');
+                        navigate('/menu');
+                    } else {
+                        localStorage.removeItem('grouped_order');
+                        navigate('/menu');
+                    }
                     break;
                 case 'now':
                     console.log('in now');
+                    console.log('fromRefund in checkoutmain ', fromRefund);
                     if (changeOrDue.amount > 0) {
                         alert(
                             `Amount ${changeOrDue.amount.toFixed(2)} due. Payment not confirmed`,
                         );
+                    }
+                    const response = finishOrder(
+                        groupedOrder,
+                        orderAllergy,
+                        tableNum,
+                        paymentMethod,
+                        fromRefund,
+                        orderId,
+                        total,
+                        true,
+                    );
+                    if (response == 'empty') {
+                        window.alert('order cannot be empty');
+                        navigate('/menu');
+                    } else {
+                        localStorage.removeItem('grouped_order');
+                        navigate('/menu');
                     }
                     break;
                 default:
@@ -133,6 +184,11 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
                                     setCashInput('');
                                     setChangeOrDue({ amount: 0, type: 'none' });
                                     setCardType('integrated');
+                                    setPaymentMethod('card');
+                                    console.log(
+                                        'payment method ',
+                                        paymentMethod,
+                                    );
                                 }}
                                 style={{
                                     backgroundColor:
@@ -147,6 +203,11 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
                                     setCashInput('');
                                     setChangeOrDue({ amount: 0, type: 'none' });
                                     setCardType('non-integrated');
+                                    setPaymentMethod('card');
+                                    console.log(
+                                        'payment method ',
+                                        paymentMethod,
+                                    );
                                 }}
                                 style={{
                                     backgroundColor:
@@ -167,6 +228,11 @@ function CheckoutMain({ tableNum, cartItems, updateOrderList }) {
                                 onClick={() => {
                                     setCardType(null);
                                     setActiveInput('cash');
+                                    setPaymentMethod('cash');
+                                    console.log(
+                                        'payment method ',
+                                        paymentMethod,
+                                    );
                                 }}
                             >
                                 <p>Amount paid</p>
