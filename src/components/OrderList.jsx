@@ -158,7 +158,7 @@ const OrderList = ({
                     <>
                         <p className="text-md flex border-b border-black text-xl py-2">
                             <span className="flex-1">Subtotal:</span>{' '}
-                            <span>${(subtotal || 0).toFixed(2)}</span>
+                            <span>£{(subtotal || 0).toFixed(2)}</span>
                         </p>
 
                         <p
@@ -168,7 +168,7 @@ const OrderList = ({
                             }}
                         >
                             <span className="flex-1">Discount:</span>{' '}
-                            <span>${(discount || 0).toFixed(2)}</span>
+                            <span>£{(discount || 0).toFixed(2)}</span>
                         </p>
 
                         <p
@@ -178,7 +178,7 @@ const OrderList = ({
                             }}
                         >
                             <span className="flex-1">Total:</span>
-                            <span>${(total || 0).toFixed(2)}</span>
+                            <span>£{(total || 0).toFixed(2)}</span>
                         </p>
                     </>
                 )}

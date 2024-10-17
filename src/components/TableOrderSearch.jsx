@@ -101,7 +101,7 @@ const TableOrderSearch = () => {
                                         {formatItems(order.contents)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        ${order.total.toFixed(2)}
+                                        £{order.total.toFixed(2)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         {order.payment_method}

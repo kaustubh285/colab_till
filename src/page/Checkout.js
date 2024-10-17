@@ -10,6 +10,9 @@ function Checkout() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const fromRefund = location.state?.fromRefund || false;
+    const orderId = location.state?.orderId || 0;
+
     const [menu, setMenu] = useState([]);
     const [groupedOrder, setGroupedOrder] = useState([]);
     const [userDets, setUserDets] = useState({});
@@ -45,9 +48,19 @@ function Checkout() {
     }, [location.pathname]);
 
     useEffect(() => {
-        setGroupedOrder(
-            JSON.parse(localStorage.getItem('grouped_order')) || [],
-        );
+        if (fromRefund) {
+            console.log('fromRefund ', fromRefund);
+            console.log('location.state?.contents ', location.state?.contents);
+            localStorage.setItem(
+                'grouped_order',
+                JSON.stringify(location.state?.contents),
+            );
+            setGroupedOrder(location.state?.contents || []);
+        } else {
+            setGroupedOrder(
+                JSON.parse(localStorage.getItem('grouped_order')) || [],
+            );
+        }
     }, []);
     return (
         <div className="h-screen w-screen flex flex-col overflow-scroll bg-slate-900 relative">
@@ -160,6 +173,8 @@ function Checkout() {
                             tableNum={tableNum}
                             cartItems={groupedOrder}
                             updateOrderList={updateOrderList}
+                            fromRefund={fromRefund}
+                            orderId={orderId}
                         />
                     </div>
                 </div>

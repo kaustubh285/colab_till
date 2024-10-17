@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RefundComponent = () => {
     const [inputValue, setInputValue] = useState('');
@@ -8,6 +9,8 @@ const RefundComponent = () => {
     const [error, setError] = useState(null);
     const [refundAmounts, setRefundAmounts] = useState({});
     const [refundReasons, setRefundReasons] = useState({});
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -201,10 +204,33 @@ const RefundComponent = () => {
                                         {formatItems(order.contents)}
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
-                                        ${order.total.toFixed(2)}
+                                        £{order.total.toFixed(2)}
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
-                                        {order.payment_method}
+                                        {order.payment_method &&
+                                        order.payment_method == 'pay-later' ? (
+                                            <button
+                                                onClick={() => {
+                                                    console.log('pay-later');
+                                                    navigate('/checkout', {
+                                                        state: {
+                                                            tableNum:
+                                                                order.table_no,
+                                                            fromRefund: true,
+                                                            contents:
+                                                                order.contents,
+                                                            orderId:
+                                                                order.order_id,
+                                                        },
+                                                    });
+                                                }}
+                                                className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                                            >
+                                                Pay Later
+                                            </button>
+                                        ) : (
+                                            order.payment_method
+                                        )}
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
                                         {order.order_status}
